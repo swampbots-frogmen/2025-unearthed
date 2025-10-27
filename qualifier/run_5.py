@@ -1,4 +1,4 @@
-from ..common.tadpoleBot import robot, square_up
+from tadpoleBot import robot, square_up
 
 '''
 Run 5 - Describe what it does

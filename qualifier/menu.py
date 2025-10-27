@@ -11,7 +11,7 @@ from run_5 import R5_run
 
 default_settings = robot.settings()
 
-menu_options = ("1", "2", "3", "4", "5")
+menu_options = ("1", "3", "5")
 menu_index = 0
 num_options = len(menu_options)
 
