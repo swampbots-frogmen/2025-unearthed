@@ -21,7 +21,7 @@ axle_track = 120  # Adjust based on your robot's axle track in mm
 rotation = wheel_diameter * 3.14159
 
 robot = DriveBase(leftWheel, rightWheel, wheel_diameter, axle_track)
-robot.settings(turn_acceleration=200)
+robot.settings(200)
 
 def square_up():
     robot.drive(-300, 0)

@@ -1,22 +1,17 @@
 # Coded with help from: https://github.com/coder-ella/lego/blob/main/pybricks/masterpiece/A_main_menu.py#L8
 from pybricks.tools import wait
 from pybricks.parameters import Button, Icon
-from tadpoleBot import hub, robot, Tanner, Grayson
+from tadpoleBot import hub, robot, leftWheel, rightWheel
 
-# from A_fn_diagnostics import run_diagnostics
-from Run1 import R1_run
-from Run2 import R2_run
-from Run3 import R3_run
-from Run4 import R4_run
-# from Run5 import R5_run
-from Run6 import R6_run
-# from Run7 import R7_run
-from Run8 import R8_run
-from Run9 import R9_run
+from run_1 import R1_run
+#from run_2 import R2_run
+from run_3 import R3_run
+#from run_4 import R4_run
+from run_5 import R5_run
 
 default_settings = robot.settings()
 
-menu_options = ("1", "2", "3", "4", "5", "6", "7")
+menu_options = ("1", "2", "3", "4", "5")
 menu_index = 0
 num_options = len(menu_options)
 
@@ -84,34 +79,26 @@ while True:
         default_settings[2],default_settings[3])
         if selected == "1":
             R1_run()
-        elif selected == "2":
-            R2_run()
+        # elif selected == "2":
+        #     R2_run()
         elif selected == "3":
             R3_run()
-        elif selected == "4":
-            R4_run()
+        # elif selected == "4":
+        #     R4_run()
         elif selected == "5":
-            R6_run()
-        elif selected == "6":
-            R9_run()
-        elif selected == "7":
-            R8_run()
-        # elif selected == "8":
-        #     R8_run()
-        # elif selected == "9":
-        #     R9_run()
+            R5_run()
         else:
             print(f"don't know selected value {selected}")
             selected = "X"
             # this is the only way to stop PyBricks
-            raise SystemExit("Closing program..")
+            raise SystemExit("Closing program...")
 
     except SystemExit:
         if selected == "X":
             raise SystemExit()
         robot.stop()
-        Tanner.stop()
-        Grayson.stop()
+        leftWheel.stop()
+        rightWheel.stop()
         hub.speaker.beep(frequency=1, duration = 50)
         while hub.buttons.pressed():
             wait(100) # wait for button to be released
