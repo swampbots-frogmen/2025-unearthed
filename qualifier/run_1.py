@@ -23,15 +23,18 @@ robot.settings(straight_acceleration=700,straight_speed=700)
 
 motorC.run_angle(3000, 50)
 # lower lever
-robot.straight(2.1 * wheel_diameter * 3.14159)
+robot.straight(2 * wheel_diameter * 3.14159)
 # go towards miner
 robot.settings(straight_acceleration=150,straight_speed=150)
 
-motorC.run_angle(3000,-80)
 # lift mineshaft
+motorC.run_angle(3000,-80)
+
+motorD.run_angle(3000, 90)
+
 robot.settings(straight_acceleration=550,straight_speed=600)
 
-robot.straight(-1.75 * wheel_diameter * 3.14159)
+robot.straight(-1.6 * wheel_diameter * 3.14159)
 # back up towards map reveal
 motorC.run_angle(3000,-110)
 # adjust lever to reveal map
@@ -41,26 +44,26 @@ robot.straight(-0.75 * wheel_diameter * 3.14159)
 # back up to adjust entry angle
 robot.turn(-45)
 # turn towards map mission
-motorC.run_angle(3000,-30)
+#motorC.run_angle(3000,-30)
 # adjust lever arm to get map reveal
 robot.settings(straight_acceleration=150,straight_speed=150)
 
 robot.straight(2.1 * wheel_diameter * 3.14159)
 # move towards map reveal
-motorC.run_angle(500,120)
+motorC.run_angle(150,120)
 # lift map reveal
 robot.straight(-0.9 * wheel_diameter * 3.14159)
 # back up from map reveal
 robot.turn(45)
 # turn towards brush
-motorC.run_angle(250,70)
+motorC.run_angle(150,60)
 # adjust lever for brush
 robot.settings(straight_acceleration=550,straight_speed=600)
 robot.straight(-1 * wheel_diameter * 3.14159)
-robot.straight(1 * wheel_diameter * 3.14159)
-robot.straight(-0.5 * wheel_diameter * 3.14159)
+robot.straight(1.5 * wheel_diameter * 3.14159)
+robot.straight(-0.9 * wheel_diameter * 3.14159)
 # back up and activate brush
-motorC.run_angle(100,-20, then=Stop.HOLD)
+motorC.run_angle(100,-40, then=Stop.HOLD)
 # lift up brush
-robot.straight(-3 * wheel_diameter * 3.14159)
+robot.straight(-3.3 * wheel_diameter * 3.14159)
 # back up to red home
