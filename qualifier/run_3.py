@@ -5,7 +5,7 @@ Run 3 - Describe what it does
 Home: Blue or Red
 Attachment: Name of the attachment
 Engineer: Who runs this mission?
-Authors: Who coded this run (name all)
+Authors: Who coded this run (Emaleigh and Anglique)
 '''
 def R3_run():
     robot.use_gyro(True)
@@ -13,7 +13,7 @@ def R3_run():
 
     square_up()
     # move toward the boulders 
-    robot.straight(2.8 * rotation)
+    robot.straight(2.5 * rotation)
     #Push the wing in
     robot.arc(200, 55)
     robot.arc(300, -49)

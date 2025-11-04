@@ -50,7 +50,8 @@ def R4_run():
     motorD.run_angle(2000, -180)
     motorD.run_angle(2000, 50)
     # leave the seal
-    robot.turn(-92)
+    robot.straight(-0.5 * rotation)
+    robot.turn(-80)
     motorD.run_angle(2000, 50)
     robot.straight(5 * rotation)
 
