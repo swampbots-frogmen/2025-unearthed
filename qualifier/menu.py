@@ -8,15 +8,11 @@ from Run1 import R1_run
 from Run2 import R2_run
 from Run3 import R3_run
 from Run4 import R4_run
-# from Run5 import R5_run
-from Run6 import R6_run
-# from Run7 import R7_run
-from Run8 import R8_run
-from Run9 import R9_run
+from Run5 import R5_run
 
 default_settings = robot.settings()
 
-menu_options = ("1", "2", "3", "4", "5", "6", "7")
+menu_options = ("1", "2", "3", "4", "5")
 menu_index = 0
 num_options = len(menu_options)
 
@@ -91,15 +87,7 @@ while True:
         elif selected == "4":
             R4_run()
         elif selected == "5":
-            R6_run()
-        elif selected == "6":
-            R9_run()
-        elif selected == "7":
-            R8_run()
-        # elif selected == "8":
-        #     R8_run()
-        # elif selected == "9":
-        #     R9_run()
+            R5_run()
         else:
             print(f"don't know selected value {selected}")
             selected = "X"
