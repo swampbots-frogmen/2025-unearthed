@@ -2,10 +2,10 @@ from tadpoleBot import robot, rotation, square_up
 
 '''
 Run 3 - Describe what it does
-Home: Blue or Red
+Home: Blue
 Attachment: Name of the attachment
-Engineer: Who runs this mission?
-Authors: Who coded this run (Emaleigh and Anglique)
+Engineer: Emaleigh and Anglique
+Authors: Emaleigh and Anglique
 '''
 def R3_run():
     robot.use_gyro(True)
@@ -13,7 +13,7 @@ def R3_run():
 
     square_up()
     # move toward the boulders 
-    robot.straight(2.5 * rotation)
+    robot.straight(2.76 * rotation)
     #Push the wing in
     robot.arc(200, 55)
     robot.arc(300, -49)
@@ -28,17 +28,17 @@ def R3_run():
     robot.straight(-1.8 * rotation)
     robot.turn(-80)
     # solve the table 
-    robot.arc(-450, 35)
+    robot.arc(-500, 35)
     # leave the table 
     robot.straight(-0.5 * rotation)
     #turn away from the mat
-    robot.turn(-43)
+    robot.turn(-50)
     # leave the mat
-    robot.straight(-2 * rotation)
+    robot.straight(-2.7 * rotation)
     # turn to the milstone 
-    robot.turn(80)
+    robot.turn(85)
     # go toward the milstone
-    robot.straight(1.2 * rotation)
+    robot.straight(1 * rotation)
     # turn to slove the milestone
     #robot.turn(-63)
     # foward to the milestone
@@ -49,7 +49,7 @@ def R3_run():
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    R3_run()
+    R3_run()                                                           
 
 
 
@@ -64,28 +64,4 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-
-
-                                                                                
+                                                                                                                                                                                                                         

@@ -36,7 +36,14 @@ def R1_run():
     robot.settings(straight_acceleration=150,straight_speed=150)
 
     # lift mineshaft
-    motorC.run_angle(3000,-80)
+    total_rotation = -80
+    lift_rotation = 0.67 * total_rotation
+
+    motorC.run_angle(3000, lift_rotation)
+
+    wait(1000)
+
+    motorC.run_angle(3000, total_rotation - lift_rotation)
 
     motorD.run_angle(3000, 90)
 

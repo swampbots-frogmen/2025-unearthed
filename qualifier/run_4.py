@@ -3,11 +3,12 @@ from pybricks.parameters import Stop
 
 '''
 Run 4 - Describe what it does
-Home: Blue or Red
+Home: Blue
 Attachment: Name of the attachment
-Engineer: Who runs this mission?
+Engineer: evan
 Authors: Who coded this run (name all)
 '''
+
 def R4_run():
     robot.use_gyro(True)
     robot.settings(straight_acceleration=660, straight_speed=500)
