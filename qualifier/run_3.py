@@ -7,6 +7,7 @@ Attachment: Name of the attachment
 Engineer: Emaleigh and Anglique
 Authors: Emaleigh and Anglique
 '''
+
 def R3_run():
     robot.use_gyro(True)
     robot.settings(straight_acceleration=400, straight_speed=500)
@@ -21,31 +22,31 @@ def R3_run():
     robot.straight(2 * rotation)
     robot.straight(-0.7 * rotation)
     # Turn to Push the wing off
-    robot.turn(70)
+    robot.turn(60)
     # Push rocks and wing off table
     robot.straight(1.7 * rotation)
     #get ready to solve the table
     robot.straight(-1.8 * rotation)
-    robot.turn(-80)
+    robot.turn(-70)
     # solve the table 
-    robot.arc(-500, 35)
+    robot.arc(-450, 32)
     # leave the table 
     robot.straight(-0.5 * rotation)
     #turn away from the mat
     robot.turn(-50)
     # leave the mat
-    robot.straight(-2.7 * rotation)
+    robot.straight(-2.5 * rotation)
     # turn to the milstone 
-    robot.turn(85)
+    robot.turn(80)
     # go toward the milstone
-    robot.straight(1 * rotation)
+    robot.straight(1.2 * rotation)
     # turn to slove the milestone
     #robot.turn(-63)
     # foward to the milestone
     #robot.straight(2 * rotation)
     #turn and slove the milstone 
-    robot.turn(-63)
-    robot.arc(-200, -55)
+    robot.turn(-50)
+    robot.arc(-235, -55)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
@@ -64,4 +65,4 @@ if __name__ == '__main__':
 
 
 
-                                                                                                                                                                                                                         
+                                                                                            
