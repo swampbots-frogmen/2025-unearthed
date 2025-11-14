@@ -16,8 +16,8 @@ motorC = Motor(Port.C)
 motorD = Motor(Port.D)
 Tanner.dc(60)
 Grayson.dc(60)
-wheel_diameter = 56  # Adjust based on your robot's wheel diameter in mm
-axle_track = 120  # Adjust based on your robot's axle track in mm
+wheel_diameter = 56  # Adjust based on our robot's wheel diameter in mm
+axle_track = 120  # Adjust based on our robot's axle track in mm
 rotation = wheel_diameter * 3.14159
 
 robot = DriveBase(Tanner, Grayson, wheel_diameter, axle_track)
