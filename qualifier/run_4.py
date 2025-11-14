@@ -35,16 +35,19 @@ def R4_run():
     robot.straight(1.8 * rotation)
     # Lift the market table
     robot.turn(-45)
-    robot.straight(2.9 * rotation)
+    robot.straight(3.1 * rotation)
     # turn to solve the seal
-    robot.turn(88)
+    robot.turn(92)
     # drive toward the seal
-    robot.straight(2.2 * rotation)
-    motorD.run_angle(2000, -180)
+    robot.straight(2.1 * rotation)
+    motorD.run_angle(2000, -200)
     # leave the seal
     robot.straight(-0.5 * rotation)
+    # turn to go home
     robot.turn(-80)
+    # adjust lever
     motorD.run_angle(2000, 50)
+    # go home
     robot.straight(5 * rotation)
 
 # If we're running ONLY this run (without the menu)
