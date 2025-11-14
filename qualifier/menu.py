@@ -3,12 +3,11 @@ from pybricks.tools import wait
 from pybricks.parameters import Button, Icon
 from tadpoleBot import hub, robot, Tanner, Grayson
 
-# from A_fn_diagnostics import run_diagnostics
-from Run1 import R1_run
-from Run2 import R2_run
-from Run3 import R3_run
-from Run4 import R4_run
-from Run5 import R5_run
+from run_1 import R1_run
+from run_2 import R2_run
+from run_3 import R3_run
+from run_4 import R4_run
+from run_5 import R5_run
 
 default_settings = robot.settings()
 

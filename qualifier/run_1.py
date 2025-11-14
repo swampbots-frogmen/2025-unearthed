@@ -1,104 +1,99 @@
-from tadpoleBot import robot, rotation, square_up, wheel_diameter, motorC, motorD, wait
-from pybricks.parameters import Stop
+from tadpoleBot import robot, rotation, square_up, motorC, wait
 
 '''
-Run 1 - Describe what it does
-Home: Blue or Red
-Attachment: Name of the attachment
-Engineer: Who runs this mission?
-Authors: Who coded this run (name all)
+Run 1 - Mineshaft, Map Reveal, Soild Deposits, Brush
+Home: Red
+Attachment: The Mammoth
+Engineer: Camden and Tanner (alternate)
+Code Authors: Camden, Tanner, Grayson
 '''
 def R1_run():
-    robot.settings(straight_acceleration=450,straight_speed=600)
+    # Basic robot settings
+    robot.settings(straight_acceleration=400,straight_speed=600)
     robot.use_gyro(True)
 
     # Square up against wall to start
     square_up()
 
-    # raise lever to hit brush
-    motorC.run_angle(3000,-60)
-    # Go towards brush and hit one side
-    robot.straight(3 * wheel_diameter * 3.14159)
-    # slight turn towards mineshaft
+    # Raise lever to avoid hitting brush
+    motorC.run_angle(3000, -60)
+    # Go towards brush
+    robot.straight(3 * rotation)
+    # Slight turn towards mineshaft
     robot.turn(15)
-    # slight movement to get away from brush
-    robot.straight(0.9 * wheel_diameter * 3.14159)
-    # finish turn towards mineshaft
+    # Slight movement to get away from brush
+    robot.straight(0.9 * rotation)
+    # Finish turn towards mineshaft
     robot.turn(75)
-    robot.settings(straight_acceleration=450,straight_speed=450)
 
-    # lower lever
+    # Lower the speed for more precise movement
+    robot.settings(straight_acceleration=450, straight_speed=450)
+
+    # Lower lever
     motorC.run_angle(3000, 50)
-    # go towards miner
-    robot.straight(2 * wheel_diameter * 3.14159)
+    # Go towards mineshaft
+    robot.straight(2 * rotation)
 
-    # 
-    robot.settings(straight_acceleration=150,straight_speed=150)
-
-    # lift mineshaft
+    # Lower the speed even more for precise alignment
+    robot.settings(straight_acceleration=150, straight_speed=150)
+    
+    # Set some variables to help tweak adjustments easier
     total_rotation = -80
     lift_rotation = 0.67 * total_rotation
 
+    # Send minecart over the line
     motorC.run_angle(3000, lift_rotation)
 
+    # Wait for a moment to let the cart go across
     wait(1000)
 
+    # Lift lever all the way back up to release track
     motorC.run_angle(3000, total_rotation - lift_rotation)
 
-    motorD.run_angle(3000, 90)
+    # Speed the robot back up again
+    robot.settings(straight_acceleration=550, straight_speed=600)
 
-    # back up towards map reveal
-    robot.settings(straight_acceleration=550,straight_speed=600)
-    # adjust lever to reveal map 
-    robot.straight(-1.55 * wheel_diameter * 3.14159)
-    motorC.run_angle(3000,-110)
+    # Back up towards map reveal
+    robot.straight(-1.55 * rotation)
+    # Adjust lever to lift top soil
+    motorC.run_angle(3000, -110)
    
-    # turn to begin map approach
+    # Turn to begin map approach
     robot.turn(-90)
-    # back up to adjust entry angle
-    robot.straight(-0.85 * wheel_diameter * 3.14159)
-    # turn towards map mission
+    # Back up to adjust entry angle
+    robot.straight(-0.85 * rotation)
+    # Turn towards map mission
     robot.turn(-45)
-    # adjust lever arm to get map reveal
-    robot.settings(straight_acceleration=150,straight_speed=150)
 
-    # move towards map reveal
-    robot.straight(2.1 * wheel_diameter * 3.14159)
-    # lift map reveal
+    # Now we're going to slow down for precise movement
+    robot.settings(straight_acceleration=150, straight_speed=150)
+
+    # Move towards map reveal
+    robot.straight(2.1 * rotation)
+    # Lift Top soil
     motorC.run_angle(150,120)
-    # back up from map reveal
-    robot.straight(-0.9 * wheel_diameter * 3.14159)
-    # turn towards brush
+    # Back up from map reveal
+    robot.straight(-0.9 * rotation)
+    # Turn towards brush
     robot.turn(45)
-    # back up from map reveal
-    robot.straight(-0.2 * wheel_diameter * 3.14159)
+    # Back up from map reveal
+    robot.straight(-0.2 * rotation)
 
+    # Lower lever to grab brush
     motorC.run_angle(3000,80)
 
+    # Speed back up for brush run
     robot.settings(straight_acceleration=450,straight_speed=550)
     
-    robot.straight(0.4 * wheel_diameter * 3.14159)
-
-    robot.straight(-0.8 * wheel_diameter * 3.14159)
+    # Knock down soil deposits
+    robot.straight(0.4 * rotation)
+    robot.straight(-0.8 * rotation)
     
-
+    # Lift brush up
     motorC.run_angle(150,-60)
-    robot.straight(-3.5 * wheel_diameter * 3.14159)
 
-    '''
-    # adjust lever for brush
-    motorC.run_angle(150,60)
-    robot.settings(straight_acceleration=450,straight_speed=600)
-
-    #robot.straight(1.5 * wheel_diameter * 3.14159)
-    #robot.straight(-1 * wheel_diameter * 3.14159)
-    #robot.straight(0.35 * wheel_diameter * 3.14159)
-    # back up and activate brush
-    motorC.run_angle(100,-40, then=Stop.HOLD)
-    # lift up brush
-    robot.straight(-3.4 * wheel_diameter * 3.14159)
-    # back up to red home
-    '''
+    # Head home
+    robot.straight(-3.5 * rotation)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

@@ -1,80 +1,79 @@
-from tadpoleBot import robot, rotation, square_up, wheel_diameter, motorC, wait
-from pybricks.parameters import Stop
+from tadpoleBot import robot, rotation, motorC, wait
 
 '''
-Run 2 - Describe what it does
-Home: Blue or Red
-Attachment: Name of the attachment
-Engineer: Who runs this mission?
-Authors: Who coded this run (name all)
+Run 2 - Salvage Operation, Flag, Angler Artifacts, Scale, Roof
+Home: Red
+Attachment: Swiss Army Knife
+Engineer: Grayson
+Code Authors: Grayson
 '''
+
+def lift_angler_artifacts():
+    robot.turn(25)
+    robot.turn(-25)
+
 def R2_run():
+    # Basic robot settings for quick launch
     robot.use_gyro(True)
-
     robot.settings(straight_acceleration=660,straight_speed=660)
 
-    # go towards sand
-    robot.straight(2.25 * wheel_diameter * 3.14159)
-    #change speed
+    # Go towards sand
+    robot.straight(2.25 * rotation)
+    # Slow down for backup
     robot.settings(straight_acceleration=350,straight_speed=350)
-    # pull back lever
-    robot.straight(-1.2 * wheel_diameter * 3.14159)
-    # turn to boat lever
+    # Pull back sand lever
+    robot.straight(-1.2 * rotation)
+    # Turn away from sand lever
     robot.turn(-45)
-    # go towards boat lever
-    robot.straight(1.1 * wheel_diameter * 3.14159)
-    # go forward to the boat lever 
+    # Drive to line up with boat lever
+    robot.straight(1.1 * rotation)
+    # Turn to face boat lever
     robot.turn(38)
-    # push boat lever
-    robot.straight(0.9 * wheel_diameter * 3.14159)
-    # drop off flag
+    # Push boat lever
+    robot.straight(0.9 * rotation)
+    # Drop off flag
     motorC.run_angle(400,-160,)
-    # wait so we can let go of flag
+    # Wait so we can let go of flag
     wait(500)
-    # raise lever back up
+    # Raise lever back up
     motorC.run_angle(400,120, then=Stop.HOLD)
-    #adjust speed back to normal
+    
+    # Adjust speed back to normal
     robot.settings(straight_acceleration=660,straight_speed=660)
-    # turn away from boat
+    # Turn away from boat
     robot.turn(-30)
-    # go past boat 
-    robot.straight(1.5 * wheel_diameter * 3.14159)
-    # turn towards lift
+    # Go past boat 
+    robot.straight(1.5 * rotation)
+    # Turn towards Angler Artifacts
     robot.turn(85)
-    # go towards lift    
-    robot.straight(1.2 * wheel_diameter * 3.14159)
-    # activate lift lever
-    robot.turn(25)
+    # Go towards Angler Artifacts    
+    robot.straight(1.2 * rotation)
+    
+    # Activate Angler Artifacts lever 3x
+    lift_angler_artifacts()
+    lift_angler_artifacts()
+    lift_angler_artifacts()
 
-    robot.turn(-25)
-
-    robot.turn(25)
-
-    robot.turn(-25)
-
-    robot.turn(25)
-    # finish activating lever
-    robot.turn(-25)
-    # back away from lift
-    robot.straight(-1.5 * wheel_diameter * 3.14159)
-    # turn towards scale
+    # Back away from Angler Artifacts
+    robot.straight(-1.5 * rotation)
+    # Turn towards scale
     robot.turn(-100)
-    # go towards scale    
-    robot.straight(3.7 * wheel_diameter * 3.14159)
-    # turn towards table lever
+    # Go towards scale    
+    robot.straight(3.7 * rotation)
+    # Turn towards roof lever
     robot.turn(90)
-    # push table lever
-    robot.straight(1 * wheel_diameter * 3.14159)
-    # back up from table lever
-    robot.straight(-0.2 * wheel_diameter * 3.14159)
-    # turn away from table lever
+    # Push roof lever
+    robot.straight(1 * rotation)
+    # Back up from roof lever
+    robot.straight(-0.2 * rotation)
+    # Turn away from roof lever
     robot.turn(-30)
-    #head towards home   
-    robot.straight(0.75 * wheel_diameter * 3.14159)
-    # turn towards home
+    # Pull away from roof lever  
+    robot.straight(0.75 * rotation)
+    # Turn towards home
     robot.turn(50)
-    #finish heading to blue home  
-    robot.straight(3.95 * wheel_diameter * 3.14159)
+    # Finish heading to blue home  
+    robot.straight(3.95 * rotation)
  
 
 # If we're running ONLY this run (without the menu)

@@ -1,61 +1,71 @@
-from tadpoleBot import robot, motorD, rotation, square_up
-from pybricks.parameters import Stop
+from tadpoleBot import robot, motorD, rotation, square_up, Stop
 
 '''
-Run 4 - Describe what it does
+Run 4 - Silo, Market Wares, Seal Statue
 Home: Blue
-Attachment: Name of the attachment
+Attachment: Wheelbarrow & Shovel
 Engineer: Evan
-Authors: Who coded this run (name all)
+Authors: Evan, Tanner
 '''
+
+def release_preserved_pieces():
+    motorD.run_angle(400, -162, then=Stop.HOLD)
+    motorD.run_angle(400, 160, then=Stop.HOLD)
 
 def R4_run():
+    # Basic robot settings for quick launch
     robot.use_gyro(True)
     robot.settings(straight_acceleration=550, straight_speed=500)
 
+    # Square up against wall to start
     square_up()
 
-    #prepare the arm
+    # Lift the arm in preparation for silo
     motorD.run_angle(700,180)
-    # go toward the silo
+    # Go toward the silo
     robot.straight(2.5 * rotation)
-    # hit the preseved pieces out of the silo
-    motorD.run_angle(400,-162, then=Stop.HOLD)
-    motorD.run_angle(400,160, then=Stop.HOLD)
-    motorD.run_angle(400,-162, then=Stop.HOLD)
-    motorD.run_angle(400,160, then=Stop.HOLD)
-    motorD.run_angle(400,-162, then=Stop.HOLD)
-    motorD.run_angle(400,160, then=Stop.HOLD)
-    # make the 
+
+    # Hit the preseved pieces out of the silo 3x
+    release_preserved_pieces()
+    release_preserved_pieces()
+    release_preserved_pieces()
+
+    # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)
-    # leave the silo
+    # Backup from the silo
     robot.straight(-0.3 * rotation) 
-    # turn toward the market wares 
+    # Turn away from silo
     robot.turn(-80)
-    # Head toward the market wares
+    # Pull away from the silo
     robot.straight(1.7 * rotation)
 
-    # turn to 
+    # Turn to face the market wares table
     robot.turn(-45)
-    # Lift the market table 
+    
+    # Go little slower past the market wares table
     robot.settings(straight_acceleration=200, straight_speed=200)
-    # adjust the speed to go slower
+    
+    # Drive past table to lift wares
     robot.straight(2.75 * rotation)
-    # change the speed back to normal
+
+    # Change the speed back to normal
     robot.settings(straight_acceleration=400, straight_speed=500)
-    # turn to solve the seal
+
+    # Turn to solve the seal
     robot.turn(87)
-    # drive toward the seal
+    # Drive toward the seal
     robot.straight(2.4 * rotation)
-    # hit the seal
+    # Smack the lever on the statue to lift it
     motorD.run_angle(2000, -190)
-    # leave the seal
+
+    # Back up a little to leave the seal
     robot.straight(-0.5 * rotation)
-    # turn to go home
+    # Turn to go home
     robot.turn(-80)
-    # adjust lever
+    # Lift lever up a little
     motorD.run_angle(2000, 50)
-    # go home
+    # Go home full speed
+    robot.settings(straight_acceleration=700, straight_speed=700)
     robot.straight(5 * rotation)
 
 # If we're running ONLY this run (without the menu)

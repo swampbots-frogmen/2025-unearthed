@@ -1,6 +1,6 @@
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor
-from pybricks.parameters import Direction, Port, Button
+from pybricks.parameters import Direction, Port, Button, Stop
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait
 
