@@ -1,4 +1,9 @@
-from tadpoleBot import robot, rotation, square_up, motorC, wait
+from tadpoleBot import robot, rotation, square_up, motorC, wait, multitask, run_task, run_motorC, drive_straight, turn
+
+# Basic robot settings
+robot.settings(straight_acceleration=400,straight_speed=600)
+robot.use_gyro(True)
+gear_ratio = -1.5
 
 '''
 Run 1 - Mineshaft, Map Reveal, Soild Deposits, Brush
@@ -7,94 +12,85 @@ Attachment: The Mammoth
 Engineer: Camden and Tanner (alternate)
 Code Authors: Camden, Tanner, Grayson
 '''
-def R1_run():
-    # Basic robot settings
-    robot.settings(straight_acceleration=400,straight_speed=600)
-    robot.use_gyro(True)
-
+async def R1_run():
     # Square up against wall to start
-    square_up()
+    await square_up()
 
-    # Raise lever to avoid hitting brush
-    motorC.run_angle(3000, -60)
-    # Go towards brush
-    robot.straight(3 * rotation)
+    # Raise lever to avoid hitting brush and go towards brush
+    await multitask(run_motorC(3000, gear_ratio * 60), drive_straight(3))
     # Slight turn towards mineshaft
-    robot.turn(15)
+    await turn(15)
     # Slight movement to get away from brush
-    robot.straight(0.9 * rotation)
-    # Finish turn towards mineshaft
-    robot.turn(75)
+    await drive_straight(0.9)
+    # Finish turn towards mineshaft and lower lever
+    await multitask(turn(75), run_motorC(3000, gear_ratio * -50))
 
     # Lower the speed for more precise movement
     robot.settings(straight_acceleration=450, straight_speed=450)
 
-    # Lower lever
-    motorC.run_angle(3000, 50)
     # Go towards mineshaft
-    robot.straight(2 * rotation)
+    await drive_straight(2)
 
     # Lower the speed even more for precise alignment
     robot.settings(straight_acceleration=150, straight_speed=150)
     
     # Set some variables to help tweak adjustments easier
-    total_rotation = -80
+    total_rotation = gear_ratio * 80
     lift_rotation = 0.67 * total_rotation
 
     # Send minecart over the line
-    motorC.run_angle(3000, lift_rotation)
+    await run_motorC(3000, lift_rotation)
 
     # Wait for a moment to let the cart go across
-    wait(1000)
+    await wait(1000)
 
     # Lift lever all the way back up to release track
-    motorC.run_angle(3000, total_rotation - lift_rotation)
+    await run_motorC(3000, total_rotation - lift_rotation)
 
     # Speed the robot back up again
     robot.settings(straight_acceleration=550, straight_speed=600)
 
-    # Back up towards map reveal
-    robot.straight(-1.55 * rotation)
-    # Adjust lever to lift top soil
-    motorC.run_angle(3000, -110)
+    # Back up towards map reveal & adjust lever to lift top soil
+    await multitask(drive_straight(-1.55), run_motorC(3000, gear_ratio * 110))
    
     # Turn to begin map approach
-    robot.turn(-90)
+    await turn(-90)
     # Back up to adjust entry angle
-    robot.straight(-0.85 * rotation)
+    await drive_straight(-0.85)
     # Turn towards map mission
-    robot.turn(-45)
+    await robot.turn(-45)
 
     # Now we're going to slow down for precise movement
     robot.settings(straight_acceleration=150, straight_speed=150)
 
     # Move towards map reveal
-    robot.straight(2.1 * rotation)
+    await drive_straight(2.1)
     # Lift Top soil
-    motorC.run_angle(150,120)
+    await run_motorC(150, gear_ratio * -120)
     # Back up from map reveal
-    robot.straight(-0.9 * rotation)
+    await drive_straight(-0.9)
     # Turn towards brush
-    robot.turn(45)
+    await turn(45)
     # Back up from map reveal
-    robot.straight(-0.2 * rotation)
+    await drive_straight(-0.2)
 
     # Lower lever to grab brush
-    motorC.run_angle(3000,80)
+    await run_motorC(3000, gear_ratio * -80)
 
     # Speed back up for brush run
-    robot.settings(straight_acceleration=450,straight_speed=550)
+    robot.settings(straight_acceleration=450, straight_speed=550)
     
     # Knock down soil deposits
-    robot.straight(0.4 * rotation)
-    robot.straight(-0.8 * rotation)
+    await drive_straight(0.4)
+    await drive_straight(-0.8)
     
     # Lift brush up
-    motorC.run_angle(150,-60)
+    await run_motorC(150, gear_ratio * 60)
 
     # Head home
-    robot.straight(-3.5 * rotation)
+    await drive_straight(-3.5)
+
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    R1_run()
+    run_task(R1_run())
