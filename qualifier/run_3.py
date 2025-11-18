@@ -19,11 +19,11 @@ def R3_run():
     # Move toward the Forge (but not all the way)
     robot.straight(2.76 * rotation)
     # Push the wing in to catch boulders
-    robot.arc(200, 55)
+    robot.arc(180, 55)
     robot.arc(300, -49)
     # Push the rocks off and back away from the forge
-    robot.straight(1.9 * rotation)
-    robot.straight(-0.6 * rotation)
+    robot.straight(1.8 * rotation)
+    robot.straight(-0.5 * rotation)
 
     # Turn to Push the wing off
     robot.turn(60)
@@ -34,7 +34,7 @@ def R3_run():
     # Turn to solve the table
     robot.turn(-70)
     # Solve the table 
-    robot.arc(-450, 32)
+    robot.arc(-300, 34)
     # Leave the table 
     robot.straight(-0.5 * rotation)
 
@@ -45,7 +45,7 @@ def R3_run():
     # Turn to the millstone 
     robot.turn(80)
     # Go toward the millstone
-    robot.straight(1.2 * rotation)
+    robot.straight(1 * rotation)
     # Turn and solve the millstone 
     robot.turn(-50)
     # Grab the millstone off the mat

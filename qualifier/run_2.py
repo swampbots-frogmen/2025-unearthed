@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, motorC, wait
+from tadpoleBot import robot, rotation, motorC, wait, Stop
 
 '''
 Run 2 - Salvage Operation, Flag, Angler Artifacts, Scale, Roof
@@ -32,7 +32,7 @@ def R2_run():
     # Push boat lever
     robot.straight(0.9 * rotation)
     # Drop off flag
-    motorC.run_angle(400,-160,)
+    motorC.run_angle(400, -160)
     # Wait so we can let go of flag
     wait(500)
     # Raise lever back up
@@ -55,7 +55,7 @@ def R2_run():
     lift_angler_artifacts()
 
     # Back away from Angler Artifacts
-    robot.straight(-1.5 * rotation)
+    robot.straight(-1.25 * rotation)
     # Turn towards scale
     robot.turn(-100)
     # Go towards scale    
@@ -63,7 +63,7 @@ def R2_run():
     # Turn towards roof lever
     robot.turn(90)
     # Push roof lever
-    robot.straight(1 * rotation)
+    robot.straight(1.1 * rotation)
     # Back up from roof lever
     robot.straight(-0.2 * rotation)
     # Turn away from roof lever
