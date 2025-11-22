@@ -66,7 +66,7 @@ def R4_run():
     motorD.run_angle(2000, 50)
     # Go home full speed
     robot.settings(straight_acceleration=700, straight_speed=700)
-    robot.straight(5 * rotation)
+    robot.straight(5 * rotation, then=Stop.COAST)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

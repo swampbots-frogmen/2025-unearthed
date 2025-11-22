@@ -1,4 +1,4 @@
-from tadpoleBot import robot, square_up
+from tadpoleBot import robot, square_up, Stop
 
 '''
 Run 5 - Deliver artifacts to the forum
@@ -18,7 +18,7 @@ def R5_run():
     # Move toward the forum
     robot.arc(500, 80)
     # Pull away from the forum
-    robot.arc(500, -80)
+    robot.arc(500, -80, then=Stop.COAST)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

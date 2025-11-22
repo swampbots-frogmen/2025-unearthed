@@ -73,7 +73,7 @@ def R2_run():
     # Turn towards home
     robot.turn(50)
     # Finish heading to blue home  
-    robot.straight(3.95 * rotation)
+    robot.straight(3.95 * rotation, then=Stop.COAST)
  
 
 # If we're running ONLY this run (without the menu)
