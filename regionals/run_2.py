@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, motorC, wait, Stop
+from tadpoleBot import robot, rotation, motorC, wait, Stop, motorD
 
 '''
 Run 2 - Salvage Operation, Flag, Angler Artifacts, Scale, Roof
@@ -30,30 +30,45 @@ def R2_run():
     # Turn to face boat lever
     robot.turn(38)
     # Push boat lever
-    robot.straight(0.9 * rotation)
+    robot.straight(1 * rotation)
     # Drop off flag
-    motorC.run_angle(400, -160)
+    motorC.run_angle(1000, -200)
     # Wait so we can let go of flag
     wait(500)
     # Raise lever back up
-    motorC.run_angle(400,120, then=Stop.HOLD)
+    motorC.run_angle(400, 120, then=Stop.HOLD)
     
     # Adjust speed back to normal
     robot.settings(straight_acceleration=660,straight_speed=660)
     # Turn away from boat
     robot.turn(-30)
     # Go past boat 
-    robot.straight(1.5 * rotation)
+    robot.straight(2.3 * rotation)
     # Turn towards Angler Artifacts
-    robot.turn(85)
-    # Go towards Angler Artifacts    
-    robot.straight(1.2 * rotation)
-    
-    # Activate Angler Artifacts lever 3x
-    lift_angler_artifacts()
-    lift_angler_artifacts()
-    lift_angler_artifacts()
+    robot.turn(125)
 
+    robot.settings(straight_acceleration=360,straight_speed=360)
+    # Go towards Angler Artifacts    
+    robot.straight(1.7 * rotation)
+    # Turn into gears
+    robot.turn(-10)
+    # Activate Angler Artifacts 
+    motorD.run_angle(1000, 1100)
+
+    # Back out of Angler Artifacts
+    robot.straight(-2 * rotation)
+    robot.turn(230)
+    robot.straight(3 * rotation)
+    robot.turn(95)
+    robot.straight(1.5 * rotation)
+    robot.straight(-0.5 * rotation)
+    robot.turn(-25)
+    robot.arc(900, 200)
+    #robot.straight(1.5 * rotation)
+    #robot.turn(30)
+    #robot.straight(5 * rotation, Stop.COAST)
+
+    '''
     # Back away from Angler Artifacts
     robot.straight(-1.25 * rotation)
     # Turn towards scale
@@ -73,8 +88,8 @@ def R2_run():
     # Turn towards home
     robot.turn(50)
     # Finish heading to blue home  
-    robot.straight(3.95 * rotation, then=Stop.COAST)
- 
+    robot.straight(3.95 * rotation)
+    '''
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
