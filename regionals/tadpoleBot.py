@@ -1,5 +1,5 @@
 from pybricks.hubs import PrimeHub
-from pybricks.pupdevices import Motor
+from pybricks.pupdevices import Motor, ColorSensor
 from pybricks.parameters import Direction, Port, Button, Stop
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait, multitask, run_task
@@ -14,6 +14,8 @@ Tanner = Motor(Port.A, Direction.COUNTERCLOCKWISE)
 Grayson = Motor(Port.B, Direction.CLOCKWISE)
 motorC = Motor(Port.C)
 motorD = Motor(Port.D)
+colorSensorLeft = ColorSensor(Port.E)
+# colorSensorRight = ColorSensor(Port.F)
 Tanner.dc(60)
 Grayson.dc(60)
 wheel_diameter = 56  # Adjust based on our robot's wheel diameter in mm

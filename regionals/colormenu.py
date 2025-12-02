@@ -1,8 +1,8 @@
-# Coded with help from: https://github.com/coder-ella/lego/blob/main/pybricks/masterpiece/A_main_menu.py#L8
+from pybricks.hubs import PrimeHub
+from pybricks.pupdevices import ColorSensor
+from pybricks.parameters import Port, Color, Button
 from pybricks.tools import wait
-from pybricks.parameters import Button, Icon
-from tadpoleBot import hub, robot, Tanner, Grayson
-from colorDectector import detect_color
+from tadpoleBot import robot, Tanner, Grayson
 
 # from A_fn_diagnostics import run_diagnostics
 from run_1 import R1_run
@@ -11,111 +11,109 @@ from run_3 import R3_run
 from run_4 import R4_run
 from run_5 import R5_run
 
-default_settings = robot.settings()
+hub = PrimeHub()
+color_sensor = ColorSensor(Port.E)
 
-menu_map = { "RED": 0, "YELLOW": 1, "GREEN": 2, "ORANGE": 3, "BLUE": 4 }
-menu_options = ("1", "2", "3", "4", "5")
-menu_index = 0
-num_options = len(menu_options)
+# Normally, the center button stops the program. But we want to use the
+# center button for our menu. So we can disable the stop button.
+hub.system.set_stop_button(None)
 
-def do_menu(hub):
-    # menu_index is global, so that it can remember what the last menu-index was
-    global menu_index
+# ----------------------
+# Program Functions
+# ----------------------
+def run_program_red():
+    print("RUN RED")
+    hub.light.on(Color.RED)
+    R1_run()
+    hub.light.off()
 
-    # Normally, the center button stops the program. But we want to use the
-    # center button for our menu. So we can disable the stop button.
-    hub.system.set_stop_button(None)
+def run_program_blue():
+    print("RUN BLUE")
+    hub.light.on(Color.BLUE)
+    R3_run()
+    hub.light.off()
+
+def run_program_yellow():
+    print("RUN YELLOW")
+    hub.light.on(Color.YELLOW)
+    R2_run()
+    hub.light.off()
+
+def run_program_white():
+    print("RUN WHITE")
+    hub.light.on(Color.WHITE)
+    R5_run()
+    hub.light.off()
+
+def run_program_green():
+    print("RUN GREEN")
+    hub.light.on(Color.GREEN)
+    R4_run()
+    hub.light.off()
+
+# ----------------------
+# Main Menu
+# ----------------------
+def main_menu():
+    selected_program = None
+    hub.light.on(Color.WHITE)
 
     while True:
-        hub.display.char(menu_options[menu_index])
+        detected_color = color_sensor.color()
 
-        color = detect_color()
+        # Select programs by color
+        if detected_color == Color.RED:
+            print("Red selected")
+            selected_program = run_program_red
+            hub.light.on(Color.RED)
 
-        while color == "OPEN":
-            wait(10)
-            print("Detecting Color...")
-            color = detect_color()
-            if (color != "OPEN"):
-                menu_index = menu_map[color]
-                print(f"The Color: {color}. Menu Index: {menu_index}")
+        elif detected_color == Color.BLUE:
+            print("Blue selected")
+            selected_program = run_program_blue
+            hub.light.on(Color.BLUE)
 
-        # Wait for any button.
-        pressed = ()
-        while not pressed:
-            pressed = hub.buttons.pressed()
-            wait(10)
+        elif detected_color == Color.YELLOW:
+            print("Yellow selected")
+            selected_program = run_program_yellow
+            hub.light.on(Color.YELLOW)
 
-        # # and then wait for the button to be released.
-        while hub.buttons.pressed():
-            wait(10)
+        elif detected_color == Color.WHITE:
+            print("White selected")
+            selected_program = run_program_white
+            hub.light.on(Color.WHITE)
 
-            print("Program stopped checking color")
-            hub.system.set_stop_button(Button.CENTER)
-            selected = menu_options[menu_index]
+        elif detected_color == Color.GREEN:
+            print("Green selected")
+            selected_program = run_program_green
+            hub.light.on(Color.GREEN)
 
-        if Button.BLUETOOTH in pressed:
-            # This is the exit key!
-            return "X"
-        # Now check which button was pressed.
-        # if Button.CENTER in pressed:
-        #     # Center button, this is the selection button, so we can exit the
-        #     # selection loop
-        #     menu_index = 1
-        #     break
+        # If center button is pressed, run selected program
+        if Button.CENTER in hub.buttons.pressed():
+            if selected_program is not None:
 
-        # elif Button.RIGHT in pressed:
-        #     # Left button, so decrement menu menu_index.
-        #     menu_index -= 1
-        #     if (menu_index < 0): #roll over!
-        #         menu_index = num_options - 1
+                # ---- IMPORTANT ----
+                # Wait until the button is released to avoid SystemExit
+                while Button.CENTER in hub.buttons.pressed():
+                    wait(10)
 
-        # elif Button.LEFT in pressed:
-        #     # Right button, so increment menu menu_index.
-        #     menu_index += 1
-        #     if (menu_index >= num_options):
-        #         menu_index = 0
+                hub.system.set_stop_button(Button.CENTER)
+
+                hub.light.on(Color.BROWN)
+
+                selected_program()
     
-    # Now we want to use the Center button as the stop button again.
-    # print("Program stopped checking color")
-    # hub.system.set_stop_button(Button.CENTER)
-    # selected = menu_options[menu_index]
-    
-    return selected
+                hub.system.set_stop_button(None)
+                hub.light.on(Color.WHITE)
+                selected_program = None  # require new color selection
 
-if hub.imu.ready():
-    hub.display.icon(Icon.HEART)
-else:
-    hub.speaker.play_notes(["C3/4","D3/4","C2/2"])
-    hub.display.icon(Icon.FALSE)
+        if Button.BLUETOOTH in hub.buttons.pressed():
+            robot.stop()
+            Tanner.stop()
+            Grayson.stop()
+            hub.speaker.beep(frequency=1, duration = 50)
 
-selected = ""
-while True:
-    try:
-        # Based on the selection, choose a program.
-        selected = do_menu(hub)
+        wait(50)
 
-        if selected == "1":
-            R1_run()
-        elif selected == "2":
-            R2_run()
-        elif selected == "3":
-            R3_run()
-        elif selected == "4":
-            R4_run()
-        elif selected == "5":
-            R6_run()
-        else:
-            print(f"don't know selected value {selected}")
-            selected = "X"
-            # this is the only way to stop PyBricks
-            raise SystemExit("Closing program..")
 
-    except SystemExit:
-        if selected == "X":
-            raise SystemExit()
-        robot.stop()
-        Tanner.stop()
-        Grayson.stop()
-        hub.speaker.beep(frequency=1, duration = 50)
-        while hub.buttons.pressed():
-            wait(100) # wait for button to be released
+# Start menu
+main_menu()
