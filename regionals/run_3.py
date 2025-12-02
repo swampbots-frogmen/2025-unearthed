@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, square_up, Stop
+from tadpoleBot import robot, rotation, square_up
 
 '''
 Run 3 - Forge, Collect Stones, Flip Table, Grab millstone
@@ -20,9 +20,9 @@ def R3_run():
     robot.straight(2.76 * rotation)
     # Push the wing in to catch boulders
     robot.arc(180, 55)
-    robot.arc(300, -49)
+    robot.arc(309, -45)
     # Push the rocks off and back away from the forge
-    robot.straight(1.8 * rotation)
+    robot.straight(1.61 * rotation)
     robot.straight(-0.5 * rotation)
 
     # Turn to Push the wing off
@@ -32,7 +32,7 @@ def R3_run():
     robot.straight(-1.8 * rotation)
 
     # Turn to solve the table
-    robot.turn(-70)
+    robot.turn(-71)
     # Solve the table 
     robot.arc(-300, 34)
     # Leave the table 
@@ -41,15 +41,15 @@ def R3_run():
     # Turn away from the mat
     robot.turn(-50)
     # Leave the mat by going backwards
-    robot.straight(-2.5 * rotation)
+    robot.straight(-2.4 * rotation)
     # Turn to the millstone 
     robot.turn(80)
     # Go toward the millstone
-    robot.straight(1 * rotation)
+    robot.straight(1.2 * rotation)
     # Turn and solve the millstone 
-    robot.turn(-50)
+    robot.turn(-54)
     # Grab the millstone off the mat
-    robot.arc(-235, -55, then=Stop.COAST)
+    robot.arc(-200, -62)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

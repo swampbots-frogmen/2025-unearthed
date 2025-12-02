@@ -56,14 +56,14 @@ def R2_run():
     motorD.run_angle(1000, 1100)
 
     # Back out of Angler Artifacts
-    robot.straight(-2 * rotation)
+    robot.straight(-1.8 * rotation)
     robot.turn(230)
     robot.straight(3 * rotation)
     robot.turn(95)
     robot.straight(1.5 * rotation)
     robot.straight(-0.5 * rotation)
     robot.turn(-25)
-    robot.arc(900, 200)
+    robot.arc(700, 100)
     #robot.straight(1.5 * rotation)
     #robot.turn(30)
     #robot.straight(5 * rotation, Stop.COAST)
