@@ -1,4 +1,4 @@
-from tadpoleBot import robot, square_up
+from tadpoleBot import robot, square_up, rotation
 
 '''
 Run 5 - Deliver artifacts to the forum
@@ -15,10 +15,8 @@ def R5_run():
     # Square up against wall to start
     square_up()
 
-    # Move toward the forum
-    robot.arc(500, 80)
-    # Pull away from the forum
-    robot.arc(500, -80)
+    robot.straight(2.8 * rotation)
+    robot.straight(-3 * rotation)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
