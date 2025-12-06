@@ -1,4 +1,5 @@
 from tadpoleBot import robot, rotation, square_up, motorC, wait, multitask, run_task, run_motorC, drive_straight, turn
+from indy import play_raiders_march
 
 # Basic robot settings
 robot.settings(straight_acceleration=400,straight_speed=600)
@@ -93,4 +94,4 @@ async def R1_run():
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    run_task(R1_run())
+    run_task(multitask(play_raiders_march(), R1_run()))
