@@ -33,24 +33,25 @@ def R4_run():
     # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)
     # Backup from the silo
-    robot.straight(-1 * rotation) 
+    robot.straight(-1.4 * rotation) 
     # Turn away from silo and flip market wares table
-    #robot.turn(-80)
-    robot.arc(-210, 160)
+    robot.arc(-245, 145)
     #turn to get scale pan
-    robot.arc(220, 120)
+
+    #robot.arc(200, 120)
+    #robot.straight(0.5 * rotation)
     #get the scale pan
-    robot.turn(-50)
-    robot.straight(-1 * rotation)
-    robot.turn(-90)
+    #robot.turn(-50)
+    #robot.straight(-0.5 * rotation)
+    #robot.turn(-90)
     #turn towards the seal
-    robot.arc(100, 140)
+    #robot.arc(100, 140)
     #move towards the seal
-    motorD.run_angle(2000, -190)
-    robot.straight(2 * rotation)
+    #motorD.run_angle(2000, -190)
+    #robot.straight(2 * rotation)
     #lift the seal
-    motorD.run_angle(2000, 70)
-    robot.turn(20)
+    #motor.run_angle(2000, 70)
+    #robot.turn(20)
 
 
     # Pull away from the silo
