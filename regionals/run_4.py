@@ -15,7 +15,7 @@ def release_preserved_pieces():
 def R4_run():
     # Basic robot settings for quick launch
     robot.use_gyro(True)
-    robot.settings(straight_acceleration=550, straight_speed=500)
+    robot.settings(straight_acceleration=350, straight_speed=500)
 
     # Square up against wall to start
     square_up()
@@ -23,7 +23,7 @@ def R4_run():
     # Lift the arm in preparation for silo
     motorD.run_angle(700,180)
     # Go toward the silo
-    robot.straight(2.5 * rotation)
+    robot.straight(2.45 * rotation)
 
     # Hit the preseved pieces out of the silo 3x
     release_preserved_pieces()
@@ -33,10 +33,22 @@ def R4_run():
     # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)
     # Backup from the silo
-    robot.straight(-1.4 * rotation) 
+    robot.straight(-1.35 * rotation) 
     # Turn away from silo and flip market wares table
-    robot.arc(-245, 145)
+    robot.arc(-255, 170)
     #turn to get scale pan
+    robot.turn(110)
+    #go towards the scale pan
+    robot.straight(1.6 * rotation) 
+    #grab the scale pan
+    robot.turn(-90)
+    #turn away from the scale pan
+    robot.straight(0.3 * rotation)
+    #turn toward seal
+    robot.turn(100)
+    motorD.run_angle(400, -162)
+    robot.straight(2.5 * rotation)
+
 
     #robot.arc(200, 120)
     #robot.straight(0.5 * rotation)
