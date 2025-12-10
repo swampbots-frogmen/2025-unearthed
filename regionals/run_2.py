@@ -18,12 +18,22 @@ def R2_run():
     robot.settings(straight_acceleration=660,straight_speed=660)
 
     # Go towards sand
-    robot.straight(2.25 * rotation)
+    robot.straight(2.4 * rotation)
+    
     # Slow down for backup
     robot.settings(straight_acceleration=350,straight_speed=350)
     # Pull back sand lever
+    robot.straight(-2.2 * rotation)
+    robot.arc(-150, 70)
+
+    robot.arc(65, 65)
+
+    robot.straight(1.45 * rotation)
+
+    """
     robot.straight(-1.2 * rotation)
     # Turn away from sand lever
+    
     robot.turn(-45)
     # Drive to line up with boat lever
     robot.straight(1.1 * rotation)
@@ -31,12 +41,15 @@ def R2_run():
     robot.turn(38)
     # Push boat lever
     robot.straight(1 * rotation)
+    """
     # Drop off flag
     motorC.run_angle(1000, -200)
     # Wait so we can let go of flag
     wait(500)
     # Raise lever back up
     motorC.run_angle(400, 120, then=Stop.HOLD)
+
+    motorC.run_angle(400, -120, then=Stop.HOLD)
     
     # Adjust speed back to normal
     robot.settings(straight_acceleration=660,straight_speed=660)
@@ -51,13 +64,14 @@ def R2_run():
     # Go towards Angler Artifacts    
     robot.straight(1.7 * rotation)
     # Turn into gears
-    robot.turn(-10)
+    robot.turn(-25)
     # Activate Angler Artifacts 
     motorD.run_angle(1000, 1100)
+    robot.turn(25)
 
     # Back out of Angler Artifacts
     robot.straight(-1.8 * rotation)
-    robot.turn(230)
+    robot.turn(190)
     robot.straight(3 * rotation)
     robot.turn(95)
     robot.straight(1.5 * rotation)
@@ -68,7 +82,7 @@ def R2_run():
     #robot.turn(30)
     #robot.straight(5 * rotation, Stop.COAST)
 
-    '''
+    
     # Back away from Angler Artifacts
     robot.straight(-1.25 * rotation)
     # Turn towards scale
@@ -89,7 +103,7 @@ def R2_run():
     robot.turn(50)
     # Finish heading to blue home  
     robot.straight(3.95 * rotation)
-    '''
+    
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
