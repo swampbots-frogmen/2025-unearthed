@@ -18,6 +18,7 @@ def R5_run():
     robot.straight(1.5 * rotation)
     robot.turn(55)
     robot.straight(1.3 * rotation)
+    robot.straight(-1.3 * rotation)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
