@@ -39,16 +39,22 @@ def R4_run():
     #turn to get scale pan
     robot.turn(110)
     #go towards the scale pan
-    robot.straight(1.6 * rotation) 
+    robot.straight(1.4 * rotation) 
     #grab the scale pan
-    robot.turn(-90)
+    robot.settings(straight_acceleration=200, straight_speed=500)
+    robot.turn(-110)
+    robot.settings(straight_acceleration=400, straight_speed=500)
     #turn away from the scale pan
-    robot.straight(0.3 * rotation)
-    #turn toward seal
-    robot.turn(100)
+    robot.arc(115, 90)
+    #go toward the seal and lift it
+    robot.arc(100,38)
     motorD.run_angle(400, -162)
-    robot.straight(2.5 * rotation)
-
+    robot.straight(1.7 * rotation)
+    motorD.run_angle(400, 100)
+    
+    
+    
+    
 
     #robot.arc(200, 120)
     #robot.straight(0.5 * rotation)
