@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, motorC, wait, Stop, motorD
+from tadpoleBot import robot, rotation, run_motorC, wait, Stop, run_motorD, drive_straight, arc, run_task, turn, multitask
 
 '''
 Run 2 - Salvage Operation, Flag, Angler Artifacts, Scale, Roof
@@ -8,103 +8,88 @@ Engineer: Grayson
 Code Authors: Grayson
 '''
 
-def lift_angler_artifacts():
-    robot.turn(25)
-    robot.turn(-25)
-
-def R2_run():
+async def R2_run():
     # Basic robot settings for quick launch
-    robot.use_gyro(True)
-    robot.settings(straight_acceleration=660,straight_speed=660)
+    robot.settings(straight_acceleration=350,straight_speed=660)
 
     # Go towards sand
-    robot.straight(2.4 * rotation)
+    await drive_straight(2.6)
     
     # Slow down for backup
     robot.settings(straight_acceleration=350,straight_speed=350)
     # Pull back sand lever
-    robot.straight(-2.2 * rotation)
-    robot.arc(-150, 70)
+    await drive_straight(-2.3)
+    await arc(-150, 70)
 
-    robot.arc(65, 65)
+    await arc(65, 65)
 
-    robot.straight(1.45 * rotation)
+    await drive_straight(1.45)
 
-    """
-    robot.straight(-1.2 * rotation)
-    # Turn away from sand lever
-    
-    robot.turn(-45)
-    # Drive to line up with boat lever
-    robot.straight(1.1 * rotation)
-    # Turn to face boat lever
-    robot.turn(38)
-    # Push boat lever
-    robot.straight(1 * rotation)
-    """
     # Drop off flag
-    motorC.run_angle(1000, -200)
+    await run_motorC(1000, -200)
     # Wait so we can let go of flag
-    wait(500)
+    await wait(500)
     # Raise lever back up
-    motorC.run_angle(400, 120, then=Stop.HOLD)
-
-    motorC.run_angle(400, -120, then=Stop.HOLD)
+    await run_motorC(400, 200)
     
     # Adjust speed back to normal
     robot.settings(straight_acceleration=660,straight_speed=660)
     # Turn away from boat
-    robot.turn(-30)
+    await turn(-30)
     # Go past boat 
-    robot.straight(2.3 * rotation)
+    await drive_straight(2.3)
     # Turn towards Angler Artifacts
-    robot.turn(125)
+    await turn(125)
 
     robot.settings(straight_acceleration=360,straight_speed=360)
     # Go towards Angler Artifacts    
-    robot.straight(1.7 * rotation)
+    await drive_straight(1.7)
     # Turn into gears
-    robot.turn(-25)
+    await turn(-25)
     # Activate Angler Artifacts 
-    motorD.run_angle(1000, 1100)
-    robot.turn(25)
+    await run_motorD(1000, 1100)
+    await turn(25)
 
     # Back out of Angler Artifacts
-    robot.straight(-1.8 * rotation)
-    robot.turn(190)
-    robot.straight(3 * rotation)
-    robot.turn(95)
-    robot.straight(1.5 * rotation)
-    robot.straight(-0.5 * rotation)
-    robot.turn(-25)
-    robot.arc(700, 100)
-    #robot.straight(1.5 * rotation)
-    #robot.turn(30)
-    #robot.straight(5 * rotation, Stop.COAST)
-
+    await drive_straight(-1.8)
+    # Turn towards the scale pan
+    await multitask(turn(200), run_motorC(200, -180))
+    # Drive towards opponent's minecart
+    await drive_straight(2)
+    await multitask(drive_straight(0.8), run_motorC(200, 180))
+    # Turn towards roof
+    await turn(110)
+    await drive_straight(2)
+    await turn(20)
+    await drive_straight(-0.5)
+    await turn(-25)
+    await arc(800, 75)
     
-    # Back away from Angler Artifacts
-    robot.straight(-1.25 * rotation)
+    '''
+    # 
+    await drive_straight(-1.25)
     # Turn towards scale
-    robot.turn(-100)
+    await turn(-100)
     # Go towards scale    
-    robot.straight(3.7 * rotation)
+    await drive_straight(3.5)
+    # Knock scale down
     # Turn towards roof lever
-    robot.turn(90)
+    await turn(90)
     # Push roof lever
-    robot.straight(1.1 * rotation)
+    await drive_straight(1.1)
     # Back up from roof lever
-    robot.straight(-0.2 * rotation)
+    await drive_straight(-0.2)
     # Turn away from roof lever
-    robot.turn(-30)
+    await turn(-30)
     # Pull away from roof lever  
-    robot.straight(0.75 * rotation)
+    await drive_straight(0.75)
     # Turn towards home
-    robot.turn(50)
+    await turn(50)
     # Finish heading to blue home  
-    robot.straight(3.95 * rotation)
+    await straight(3.95)
+    '''
     
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    R2_run()
+    run_task(R2_run())
