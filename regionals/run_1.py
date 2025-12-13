@@ -1,4 +1,5 @@
 from tadpoleBot import robot, rotation, square_up, motorC, wait, multitask, run_task, run_motorC, drive_straight, turn, arc, Stop
+from indy import play_raiders_march
 
 # Basic robot settings
 robot.settings(straight_acceleration=400,straight_speed=600)

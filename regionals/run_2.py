@@ -63,32 +63,8 @@ async def R2_run():
     await turn(20)
     await drive_straight(-0.5)
     await turn(-25)
+    robot.settings(straight_acceleration=660,straight_speed=660)
     await arc(800, 75)
-    
-    '''
-    # 
-    await drive_straight(-1.25)
-    # Turn towards scale
-    await turn(-100)
-    # Go towards scale    
-    await drive_straight(3.5)
-    # Knock scale down
-    # Turn towards roof lever
-    await turn(90)
-    # Push roof lever
-    await drive_straight(1.1)
-    # Back up from roof lever
-    await drive_straight(-0.2)
-    # Turn away from roof lever
-    await turn(-30)
-    # Pull away from roof lever  
-    await drive_straight(0.75)
-    # Turn towards home
-    await turn(50)
-    # Finish heading to blue home  
-    await straight(3.95)
-    '''
-    
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

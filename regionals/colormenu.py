@@ -1,8 +1,8 @@
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ColorSensor
-from pybricks.parameters import Port, Color, Button
+from pybricks.parameters import Port, Color, Button, Icon
 from pybricks.tools import wait
-from tadpoleBot import robot, Tanner, Grayson
+from tadpoleBot import robot, Tanner, Grayson, run_task
 
 # Import your existing run files
 from run_1 import R1_run
@@ -15,97 +15,105 @@ hub = PrimeHub()
 color_sensor = ColorSensor(Port.E)
 
 # Disable system stop button (optional)
-hub.system.set_stop_button(None)
+hub.system.set_stop_button(Button.BLUETOOTH)
 
-
+# Function Color Map
+color_map = {
+    Color.RED: 1,
+    Color.YELLOW: 2,
+    Color.BLUE: 3,
+    Color.GREEN: 4,
+    Color.WHITE: 5
+}
 
 # ----------------------
 # Program functions
 # ----------------------
 def run_program_red():
-    hub.light.on(Color.RED)
-    hub.display.number(1)
-    wait(200)  # show number briefly before starting run
-    R1_run()
-    hub.display.clear()
-    hub.light.off()
+    run_task(R1_run())
 
 def run_program_yellow():
-    hub.light.on(Color.YELLOW)
-    hub.display.number(2)
-    wait(200)
-    R2_run()
-    hub.display.clear()
-    hub.light.off()
+    run_task(R2_run())
 
 def run_program_blue():
-    hub.light.on(Color.BLUE)
-    hub.display.number(3)
-    wait(200)
     R3_run()
-    hub.display.clear()
-    hub.light.off()
 
 def run_program_green():
-    hub.light.on(Color.GREEN)
-    hub.display.number(4)
-    wait(200)
     R4_run()
-    hub.display.clear()
-    hub.light.off()
 
 def run_program_white():
-    hub.light.on(Color.WHITE)
-    hub.display.number(5)
-    wait(200)
     R5_run()
-    hub.display.clear()
-    hub.light.off()
 
 # ----------------------
 # Main Menu
 # ----------------------
 def main_menu():
     selected_program = None
-    hub.light.on(Color.WHITE)
+    hub.light.on(Color.CYAN)
+
+    pressed = ()
 
     while True:
-        # Detect color
-        detected_color = color_sensor.color()
+        if (not pressed):
+            pressed = hub.buttons.pressed()
 
-        if detected_color == Color.RED:
-            selected_program = run_program_red
-            hub.light.on(Color.RED)
-        elif detected_color == Color.YELLOW:
-            selected_program = run_program_yellow
-            hub.light.on(Color.YELLOW)
-        elif detected_color == Color.BLUE:
-            selected_program = run_program_blue
-            hub.light.on(Color.BLUE)
-        elif detected_color == Color.GREEN:
-            selected_program = run_program_green
-            hub.light.on(Color.GREEN)
-        elif detected_color == Color.WHITE:
-            selected_program = run_program_white
+            # Detect color
+            detected_color = color_sensor.color()
+            if (detected_color in color_map):
+                hub.light.on(detected_color)
+                hub.display.char(str(color_map[detected_color]))
+            else:
+                hub.light.on(Color.CYAN)
+                hub.display.icon(Icon.PAUSE)
+
+            print(f"Color: {detected_color}")
+
+            if detected_color == Color.RED:
+                selected_program = run_program_red
+                hub.light.on(Color.MAGENTA)
+            elif detected_color == Color.YELLOW:
+                selected_program = run_program_yellow
+                hub.light.on(Color.YELLOW)
+            elif detected_color == Color.BLUE:
+                selected_program = run_program_blue
+                hub.light.on(Color.BLUE)
+            elif detected_color == Color.GREEN:
+                selected_program = run_program_green
+                hub.light.on(Color.GREEN)
+            elif detected_color == Color.WHITE:
+                selected_program = run_program_white
+                hub.light.on(Color.WHITE)
+
+        else:
+            if Button.CENTER in pressed and selected_program is not None:
+                hub.display.icon(Icon.HAPPY)
+                selected_program()
+                selected_program = None
+                pressed = ()
+                hub.system.set_stop_button(Button.BLUETOOTH)
+
+            if Button.BLUETOOTH in pressed:
+                break
+
+
+            '''
+            hub.system.set_stop_button(Button.CENTER)
+
+            if (selected_program != None):
+                selected_program()
+        
+            hub.system.set_stop_button(None)
             hub.light.on(Color.WHITE)
+            selected_program = None  # require new color selection
+            # Stop everything if BLUETOOTH pressed
 
-        hub.system.set_stop_button(Button.CENTER)
-
-        hub.light.on(Color.BROWN)
-
-        selected_program()
-    
-        hub.system.set_stop_button(None)
-        hub.light.on(Color.WHITE)
-        selected_program = None  # require new color selection
-        # Stop everything if BLUETOOTH pressed
-
-        if Button.BLUETOOTH in hub.buttons.pressed():
-            robot.stop()
-            Tanner.stop()
-            Grayson.stop()
-            hub.speaker.beep(600, 50)
-            break
+            if Button.BLUETOOTH in hub.buttons.pressed():
+                robot.stop()
+                Tanner.stop()
+                Grayson.stop()
+                hub.speaker.beep(600, 50)
+                break
+            '''
 
         wait(50)
 
