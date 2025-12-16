@@ -5,7 +5,7 @@ Run 4 - Silo, Market Wares, Seal Statue
 Home: Blue
 Attachment: Wheelbarrow & Shovel
 Engineer: Evan
-Authors: Evan, Tanner
+Authors: Evan, Tanner, Grayson 
 '''
 
 def release_preserved_pieces():
@@ -21,8 +21,7 @@ def R4_run():
     square_up()
 
     # Lift the arm in preparation for silo
-    motorD.run_angle(700
-    ,180)
+    motorD.run_angle(700,180)
     # Go toward the silo
     robot.straight(2.45 * rotation)
 
@@ -34,27 +33,59 @@ def R4_run():
     # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)
     # Backup from the silo
-    robot.straight(-1.35 * rotation) 
-    # Turn away from silo and flip market wares table
-    robot.arc(-245, 190)
+    robot.straight(-1.35 * rotation)
+    # turn away from the silo
+    robot.turn(-60)
+    # turn away from the silo
+    # go toward the table
+    robot.straight(2.3 * rotation)
+    # go toward the table
+    robot.turn(-80)
+    # turn toward the table 
+    robot.straight(1.3 * rotation)
+    # turn away from the table
+    robot.turn(80)
+    # go towards the scale pan
+    robot.straight(0.9 * rotation)
+    # Pull scale pan out
+    robot.turn(-90)
+    # arc towards the seal
+    robot.arc(90, 100)
+    # go towards the seal
+    robot.straight(1.35 * rotation)
+    # lower level for the seal
+    motorD.run_angle(700, -180)
+    # go towards the seal
+    robot.straight(0.6 * rotation)
+    # raise the seal
+    motorD.run_angle(700, 90)
+    robot.turn(35)
+    # back up from the seal
+    robot.straight(-1 * rotation)
+    # turn away from the seal
+    robot.turn(-90)
+    # head home
+    robot.straight(8 * rotation)
+    '''
     #turn to get scale pan
-    robot.turn(140)
+    #robot.turn(147)
     #go towards the scale pan
-    robot.straight(1.35 * rotation) 
+    robot.straight(1.45 * rotation) 
     #grab the scale pan
     robot.settings(straight_acceleration=50, straight_speed=100)
     robot.turn(-100)
     robot.settings(straight_acceleration=400, straight_speed=500)
+    robot.straight(0.3 * rotation)
     #turn away from the scale pan
     robot.arc(90, 90)
     #go toward the seal and lift it
-    #robot.arc(20,25)
-    motorD.run_angle(400, -162)
+    robot.arc(30,15)
+    motorD.run_angle(350, -162)
     robot.straight(2 * rotation)
     motorD.run_angle(400, 100)
     robot.straight(-0.7 * rotation)
-    robot.turn(-90)
-    robot.straight(2 * rotation)
+    robot.turn(-60)
+    robot.straight(4 * rotation)
 
     
     
@@ -107,7 +138,7 @@ def R4_run():
     # Go home full speed
     #robot.settings(straight_acceleration=700, straight_speed=700)
     #robot.straight(5 * rotation)
-
+    '''
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
     R4_run()
