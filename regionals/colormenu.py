@@ -37,7 +37,7 @@ def run_program_yellow():
     run_task(R2_run())
 
 def run_program_blue():
-    R3_run()
+    run_task(R3_run())
 
 def run_program_green():
     run_task(R4_run())

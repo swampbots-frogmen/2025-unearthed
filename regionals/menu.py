@@ -83,7 +83,7 @@ while True:
         elif selected == "2":
             run_task(R2_run())
         elif selected == "3":
-            R3_run()
+            run_task(R3_run())
         elif selected == "4":
             run_task(R4_run())
         elif selected == "5":
