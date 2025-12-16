@@ -20,9 +20,9 @@ def R3_run():
     robot.straight(2.76 * rotation)
     # Push the wing in to catch boulders
     robot.arc(180, 55)
-    robot.arc(300, -49)
+    robot.arc(200, -49)
     # Push the rocks off and back away from the forge
-    robot.straight(1.8 * rotation)
+    robot.straight(1.3 * rotation)
     robot.straight(-0.5 * rotation)
 
     # Turn to Push the wing off
