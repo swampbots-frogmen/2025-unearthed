@@ -37,8 +37,8 @@ async def run_motorC(speed, angle):
 async def run_motorD(speed, angle):
     await motorD.run_angle(speed, angle)
 
-async def drive_straight(rotations):
-    await robot.straight(rotations * rotation, then=Stop.HOLD)
+async def drive_straight(rotations, behavior=Stop.HOLD):
+    await robot.straight(rotations * rotation, then=behavior)
 
 async def turn(degrees):
     await robot.turn(degrees)

@@ -12,6 +12,8 @@ async def R2_run():
     # Basic robot settings for quick launch
     robot.settings(straight_acceleration=350,straight_speed=660)
 
+    # --- SALVAGE OPERATION MISSION --- #
+
     # Go towards sand
     await drive_straight(2.6)
     
@@ -31,6 +33,8 @@ async def R2_run():
     await wait(500)
     # Raise lever back up
     await run_motorC(400, 200)
+
+    # --- ANGLER ARTIFACTS MISSION --- #
     
     # Adjust speed back to normal
     robot.settings(straight_acceleration=660,straight_speed=660)
@@ -50,6 +54,8 @@ async def R2_run():
     await run_motorD(1000, 1100)
     await turn(25)
 
+    # --- SCALE MISSION --- #
+
     # Back out of Angler Artifacts
     await drive_straight(-1.8)
     # Turn towards the scale pan
@@ -57,10 +63,15 @@ async def R2_run():
     # Drive towards opponent's minecart
     await drive_straight(2)
     await multitask(drive_straight(0.8), run_motorC(200, 180))
+
+    # --- ROOF MISSION --- #
+
     # Turn towards roof
     await turn(110)
     await drive_straight(2)
     await turn(20)
+
+    # Drive to BLUE home
     await drive_straight(-0.5)
     await turn(-25)
     robot.settings(straight_acceleration=660,straight_speed=660)

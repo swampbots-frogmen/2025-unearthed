@@ -21,5 +21,9 @@ async def play_raiders_march():
         "E5/8", "D5/8"
     ], tempo=150)
 
+async def march_twice():
+    await play_raiders_march()
+    await play_raiders_march()
+
 if __name__ == '__main__':
     run_task(play_raiders_march())

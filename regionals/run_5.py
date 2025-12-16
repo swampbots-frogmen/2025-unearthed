@@ -1,4 +1,4 @@
-from tadpoleBot import robot, square_up, rotation
+from tadpoleBot import robot, square_up, rotation, drive_straight, turn, run_task, arc
 
 '''
 Run 5 - Deliver artifacts to the forum
@@ -7,20 +7,22 @@ Attachment: Bulldozer
 Engineer: Chaz
 Authors: Chaz and Tanner
 '''
-def R5_run():
+async def R5_run():
     # Basic robot settings for quick launch
-    robot.use_gyro(True)
     robot.settings(straight_acceleration=300, straight_speed=300)
 
     # Square up against wall to start
-    square_up()
+    await square_up()
 
-    robot.straight(1 * rotation)
-    robot.turn(45)
-    robot.straight(2 * rotation)
-    robot.straight(-2 * rotation)
-    robot.turn(-45)
-    robot.straight(-1 * rotation)
+    # --- FORUM DELIVERY MISSION --- #
+    await drive_straight(1)
+    await turn(45)
+    await drive_straight(2)
+
+    # Drive back home quickly!
+    robot.settings(straight_acceleration=700, straight_speed=700)
+    await arc(700, -40)
+
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    R5_run()
+    run_task(R5_run())

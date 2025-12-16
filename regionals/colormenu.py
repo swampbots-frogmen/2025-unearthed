@@ -2,7 +2,8 @@ from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ColorSensor
 from pybricks.parameters import Port, Color, Button, Icon
 from pybricks.tools import wait
-from tadpoleBot import robot, Tanner, Grayson, run_task
+from tadpoleBot import robot, Tanner, Grayson, run_task, multitask
+from indy import march_twice
 
 # Import your existing run files
 from run_1 import R1_run
@@ -30,7 +31,7 @@ color_map = {
 # Program functions
 # ----------------------
 def run_program_red():
-    run_task(R1_run())
+    run_task(multitask(R1_run(), march_twice()))
 
 def run_program_yellow():
     run_task(R2_run())
@@ -39,10 +40,10 @@ def run_program_blue():
     R3_run()
 
 def run_program_green():
-    R4_run()
+    run_task(R4_run())
 
 def run_program_white():
-    R5_run()
+    run_task(R5_run())
 
 # ----------------------
 # Main Menu
@@ -95,8 +96,6 @@ def main_menu():
             if Button.BLUETOOTH in pressed:
                 break
 
-
-            '''
             hub.system.set_stop_button(Button.CENTER)
 
             if (selected_program != None):
@@ -104,16 +103,16 @@ def main_menu():
         
             hub.system.set_stop_button(None)
             hub.light.on(Color.WHITE)
-            selected_program = None  # require new color selection
-            # Stop everything if BLUETOOTH pressed
+            # require new color selection
+            selected_program = None 
 
+            # Stop everything if BLUETOOTH pressed
             if Button.BLUETOOTH in hub.buttons.pressed():
                 robot.stop()
                 Tanner.stop()
                 Grayson.stop()
                 hub.speaker.beep(600, 50)
                 break
-            '''
 
         wait(50)
 

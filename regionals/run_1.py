@@ -17,6 +17,8 @@ async def R1_run():
     # Square up against wall to start
     await square_up()
 
+    # --- MINECART MISSION --- #
+
     # Raise lever to avoid hitting brush and go towards brush
     await multitask(run_motorC(3000, gear_ratio * 60), drive_straight(2))
     # Arc toward mineshaft and lower arm
@@ -31,12 +33,13 @@ async def R1_run():
     # Send minecart over the line
     await run_motorC(200, lift_rotation)
     
-
     # Wait for a moment to let the cart go across
     await wait(1000)
 
     # Lift lever all the way back up to release track
     await run_motorC(1000, total_rotation - lift_rotation - 20)
+
+    # --- MAP REVEAL MISSION --- #
 
     # Speed the robot back up again
     robot.settings(straight_acceleration=550, straight_speed=600)
@@ -53,6 +56,8 @@ async def R1_run():
     await drive_straight(1.25)
     # lift topsoil
     await run_motorC(150, gear_ratio * -120)
+
+    # --- SOIL DEPOSITS MISSION --- #
 
     # back away from map
     await drive_straight(-0.7)
