@@ -15,9 +15,12 @@ def R5_run():
     # Square up against wall to start
     square_up()
 
-    robot.straight(2.8 * rotation)
-    robot.straight(-3 * rotation)
-
+    robot.straight(1 * rotation)
+    robot.turn(45)
+    robot.straight(2 * rotation)
+    robot.straight(-2 * rotation)
+    robot.turn(-45)
+    robot.straight(-1 * rotation)
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
     R5_run()
