@@ -81,14 +81,6 @@ async def R1_run():
 
     # Head home
     await robot.straight(-3.5 * rotation, then=Stop.COAST)
-    
-
-
-
-
-    #await arc(350, -110)
-
-    
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
