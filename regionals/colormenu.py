@@ -87,14 +87,18 @@ def main_menu():
 
         else:
             if Button.CENTER in pressed and selected_program is not None:
+                # hub.system.set_stop_button(Button.CENTER)
                 hub.display.icon(Icon.HAPPY)
                 selected_program()
                 selected_program = None
                 pressed = ()
                 hub.system.set_stop_button(Button.BLUETOOTH)
 
-            if Button.BLUETOOTH in pressed:
+            elif Button.BLUETOOTH in pressed:
                 break
+
+            else:
+                continue
 
             hub.system.set_stop_button(Button.CENTER)
 

@@ -24,8 +24,8 @@ async def R4_run():
 
     # Hit the preseved pieces out of the silo 3x
     await release_preserved_pieces()
-    # await release_preserved_pieces()
-    # await release_preserved_pieces()
+    await release_preserved_pieces()
+    await release_preserved_pieces()
 
     # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)

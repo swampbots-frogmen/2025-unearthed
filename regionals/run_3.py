@@ -23,13 +23,17 @@ async def R3_run():
     await arc(180, 55)
     await arc(200, -49)
     # Push the rocks off and back away from the forge
-    await drive_straight(1.3)
-    await drive_straight(-0.5)
+    #robot.settings(straight_acceleration=200, straight_speed=350)
+    await drive_straight(1.1)
+    await turn(-20)
+    await turn(20)
+    #robot.settings(straight_acceleration=400, straight_speed=500)
+    await drive_straight(-0.3)
 
     # --- GET ROCKS OFF BOARD --- #
 
     # Turn to Push the wing off
-    await turn(60)
+    await turn(70)
     # Push rocks and wing off table and return to table
     await drive_straight(1.7)
     await drive_straight(-1.8)
@@ -39,24 +43,24 @@ async def R3_run():
     # Turn to solve the table
     await turn(-70)
     # Solve the table 
-    await arc(-300, 34)
+    await arc(-210, 60)
     # Leave the table 
     await drive_straight(-0.5)
 
     # --- GRAB THE MILLSTONE MISSION --- #
 
     # Turn away from the mat
-    await turn(-50)
+    await turn(-30)
     # Leave the mat by going backwards
-    await drive_straight(-2.5)
+    await drive_straight(-2)
     # Turn to the millstone 
     await turn(80)
     # Go toward the millstone
-    await drive_straight(1)
+    await drive_straight(1.2)
     # Turn and solve the millstone 
-    await turn(-50)
+    await turn(-70)
     # Grab the millstone off the mat
-    await arc(-235, -55)
+    await arc(-220, -75)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
