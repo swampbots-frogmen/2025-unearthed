@@ -1,90 +1,71 @@
-from tadpoleBot import robot, motorD, rotation, square_up, Stop
+from tadpoleBot import robot, motorD, rotation, square_up, Stop, drive_straight, turn, arc, multitask, run_task, run_motorD
 
 '''
 Run 4 - Silo, Market Wares, Seal Statue
 Home: Blue
 Attachment: Wheelbarrow & Shovel
 Engineer: Evan
-Authors: Evan, Tanner
+Authors: Evan, Tanner, Grayson 
 '''
 
-def release_preserved_pieces():
-    motorD.run_angle(400, -162, then=Stop.HOLD)
-    motorD.run_angle(400, 160, then=Stop.HOLD)
+async def release_preserved_pieces():
+    await run_motorD(400, -162)
+    await run_motorD(400, 160)
 
-def R4_run():
+async def R4_run():
     # Basic robot settings for quick launch
-    robot.use_gyro(True)
-    robot.settings(straight_acceleration=550, straight_speed=500)
+    robot.settings(straight_acceleration=350, straight_speed=500)
 
-    # Square up against wall to start
-    square_up()
+    # Square up against wall to start & Lift the arm in preparation for silo
+    await multitask(square_up(), run_motorD(700,180))
 
-    # Lift the arm in preparation for silo
-    motorD.run_angle(700,180)
     # Go toward the silo
-    robot.straight(2.5 * rotation)
+    await drive_straight(2.45)
 
     # Hit the preseved pieces out of the silo 3x
-    release_preserved_pieces()
-    release_preserved_pieces()
-    release_preserved_pieces()
+    await release_preserved_pieces()
+    await release_preserved_pieces()
+    await release_preserved_pieces()
 
     # Slow down the robot for more precise movement
     robot.settings(straight_acceleration=400, straight_speed=500)
     # Backup from the silo
-    robot.straight(-1 * rotation) 
-    # Turn away from silo and flip market wares table
-    #robot.turn(-80)
-    robot.arc(-210, 160)
-    #turn to get scale pan
-    robot.arc(220, 120)
-    #get the scale pan
-    robot.turn(-50)
-    robot.straight(-1 * rotation)
-    robot.turn(-90)
-    #turn towards the seal
-    robot.arc(100, 140)
-    #move towards the seal
-    motorD.run_angle(2000, -190)
-    robot.straight(2 * rotation)
-    #lift the seal
-    motorD.run_angle(2000, 70)
-    robot.turn(20)
-
-
-    # Pull away from the silo
-    #robot.straight(1.7 * rotation)
-
-    # Turn to face the market wares table
-    #robot.turn(-45)
+    await drive_straight(-1.35)
+    # turn away from the silo
+    await turn(-60)
+    # turn away from the silo
+    # go toward the table
+    await drive_straight(2.4)
+    # go toward the table
+    await turn(-80)
+    # Raise the table
+    await drive_straight(2.5)
+    # face away from scale pan
+    await turn(-45)
+    # Back up to scale pan
+    await drive_straight(-1)
+    # pull out scale pan
+    await drive_straight(0.75)
+    # Face the seal
+    await turn(140)
+    # Drive to the seal
+    await drive_straight(2.35)
     
-    # Go little slower past the market wares table
-    #robot.settings(straight_acceleration=200, straight_speed=200)
-    
-    # Drive past table to lift wares
-    #robot.straight(2.75 * rotation)
-
-    # Change the speed back to normal
-    #robot.settings(straight_acceleration=400, straight_speed=500)
-
-    # Turn to solve the seal
-    #robot.turn(87)
-    # Drive toward the seal
-    #robot.straight(2.4 * rotation)
-    # Smack the lever on the statue to lift it
-    #motorD.run_angle(2000, -190)
-
-    # Back up a little to leave the seal
-    #robot.straight(-0.5 * rotation)
-    # Turn to go home
-    #robot.turn(-80)
-    # Lift lever up a little
-    #motorD.run_angle(2000, 50)
-    # Go home full speed
-    #robot.settings(straight_acceleration=700, straight_speed=700)
-    #robot.straight(5 * rotation)
+    # lower level for the seal
+    await run_motorD(700, -180)
+    # go towards the seal
+    await drive_straight(0.35)
+    # raise the seal
+    await run_motorD(1000, 60)
+    await turn(20)
+    robot.settings(straight_acceleration=700, straight_speed=700)
+    # back up from the seal
+    await drive_straight(-1)
+    # turn away from the seal
+    await turn(-70)
+    # head home
+    await drive_straight(5.5)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
-    R4_run()
+    run_task(R4_run())

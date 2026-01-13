@@ -1,7 +1,8 @@
 # Coded with help from: https://github.com/coder-ella/lego/blob/main/pybricks/masterpiece/A_main_menu.py#L8
 from pybricks.tools import wait
 from pybricks.parameters import Button, Icon
-from tadpoleBot import hub, robot, Tanner, Grayson
+from tadpoleBot import hub, robot, Tanner, Grayson, run_task, multitask
+from indy import march_twice
 
 from run_1 import R1_run
 from run_2 import R2_run
@@ -78,15 +79,15 @@ while True:
         robot.settings(default_settings[0],default_settings[1],
         default_settings[2],default_settings[3])
         if selected == "1":
-            R1_run()
+            run_task(multitask(R1_run(), march_twice()))
         elif selected == "2":
-            R2_run()
+            run_task(R2_run())
         elif selected == "3":
-            R3_run()
+            run_task(R3_run())
         elif selected == "4":
-            R4_run()
+            run_task(R4_run())
         elif selected == "5":
-            R5_run()
+            run_task(R5_run())
         else:
             print(f"don't know selected value {selected}")
             selected = "X"

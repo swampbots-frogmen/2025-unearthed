@@ -23,7 +23,8 @@ axle_track = 120  # Adjust based on our robot's axle track in mm
 rotation = wheel_diameter * 3.14159
 
 robot = DriveBase(Tanner, Grayson, wheel_diameter, axle_track)
-robot.settings(turn_acceleration=200)
+robot.settings(turn_acceleration=200, turn_rate=400)
+robot.use_gyro(True)
 
 async def square_up():
     robot.drive(-300, 0)
@@ -33,8 +34,14 @@ async def square_up():
 async def run_motorC(speed, angle):
     await motorC.run_angle(speed, angle)
 
-async def drive_straight(rotations):
-    await robot.straight(rotations * rotation)
+async def run_motorD(speed, angle):
+    await motorD.run_angle(speed, angle)
+
+async def drive_straight(rotations, behavior=Stop.HOLD):
+    await robot.straight(rotations * rotation, then=behavior)
 
 async def turn(degrees):
     await robot.turn(degrees)
+
+async def arc(radius, distance):
+    await robot.arc(radius, distance)
