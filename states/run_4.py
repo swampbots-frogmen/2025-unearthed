@@ -7,13 +7,14 @@ Attachment: Wheelbarrow & Shovel
 Engineer: Evan
 Authors: Evan, Tanner, Grayson 
 '''
+
 async def release_preserved_pieces():
-    await run_motorD(3000, -172)
-    await run_motorD(3000, 170)
+    await run_motorD(400, -162)
+    await run_motorD(400, 160)
 
 async def R4_run():
     # Basic robot settings for quick launch
-    robot.settings(straight_acceleration=700, straight_speed=800)
+    robot.settings(straight_acceleration=350, straight_speed=500)
 
     # Square up against wall to start & Lift the arm in preparation for silo
     await multitask(square_up(), run_motorD(700,180))
@@ -24,6 +25,10 @@ async def R4_run():
     # Hit the preseved pieces out of the silo 3x
     await release_preserved_pieces()
     await release_preserved_pieces()
+    await release_preserved_pieces()
+
+    # Slow down the robot for more precise movement
+    robot.settings(straight_acceleration=400, straight_speed=500)
     # Backup from the silo
     await drive_straight(-1.35)
     # turn away from the silo
@@ -31,7 +36,6 @@ async def R4_run():
     # turn away from the silo
     # go toward the table
     await drive_straight(2.4)
-    robot.settings(straight_acceleration=500, straight_speed=500)
     # go toward the table
     await turn(-80)
     # Raise the table
@@ -44,9 +48,9 @@ async def R4_run():
     await drive_straight(0.75)
     # Face the seal
     await turn(140)
-    robot.settings(straight_acceleration=960, straight_speed=960)
     # Drive to the seal
     await drive_straight(2.35)
+    
     # lower level for the seal
     await run_motorD(700, -180)
     # go towards the seal
@@ -54,6 +58,7 @@ async def R4_run():
     # raise the seal
     await run_motorD(1000, 60)
     await turn(20)
+    robot.settings(straight_acceleration=700, straight_speed=700)
     # back up from the seal
     await drive_straight(-1)
     # turn away from the seal
