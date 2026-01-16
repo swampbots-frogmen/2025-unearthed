@@ -31,7 +31,7 @@ async def R4_run():
     # turn away from the silo
     # go toward the table
     await drive_straight(2.4)
-    robot.settings(straight_acceleration=500, straight_speed=500)
+    robot.settings(straight_acceleration=600, straight_speed=600)
     # go toward the table
     await turn(-80)
     # Raise the table
@@ -39,16 +39,13 @@ async def R4_run():
     # face away from scale pan
     await turn(-45)
     # Back up to scale pan
-    await drive_straight(-1)
+    await drive_straight(-1.3)
     # pull out scale pan
     await drive_straight(0.75)
     # Face the seal
     await turn(140)
     robot.settings(straight_acceleration=960, straight_speed=960)
-    # Drive to the seal
-    await drive_straight(2.35)
-    # lower level for the seal
-    await run_motorD(700, -180)
+    await multitask(drive_straight(2.35), run_motorD(700,-180))
     # go towards the seal
     await drive_straight(0.35)
     # raise the seal
