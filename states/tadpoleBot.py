@@ -62,7 +62,7 @@ def advanced_arc(speed, radius, angle):
     #-------Robot Variables-----------
     TRACK_WIDTH = axle_track  # mm, width of the robot, used in several calculations
     WHEEL_CIRC = rotation   # mm, circumfrence of wheel used in several calculations
-    LEFT_MOTOR_FLIPPED = True
+    LEFT_MOTOR_FLIPPED = False
 
     #------PD Correction Variables-----------
     KP = 1.5
@@ -166,19 +166,9 @@ def advanced_arc(speed, radius, angle):
         right_angle = Grayson.angle() # gets the current degrees counted by right motor
 
         # ---------------- Progress Calculation ----------------
-        if direction == 1: # detects if moving forward
-            # Forward: hybrid motor + gyro
-            motor_progress = max(abs(left_angle)/outer_deg, abs(right_angle)/outer_deg) # calculates motor progress based off degrees counted
-            motor_progress = min(motor_progress, 1.0) # calculates motor progress based off degrees counted
-            gyro_progress = min(abs(current_heading)/abs(angle), 1.0) # calculates progress based off gyro
-            progress = 0.7 * motor_progress + 0.3 * gyro_progress # uses a hybrid between the 2 progresses to make precise calculations
-        else:
-            # Backward: gyro only
-            progress = min(abs(current_heading)/abs(angle), 1.0) # if moving backwards calculates only based on gyro because motor degrees causes issues
-            # when moving backwards
-
+        progress = min(abs(current_heading)/abs(angle), 1.0) #calculates only based on gyro because motor degrees doesn't give an accurate angle
         # ---------------- Target Heading & Error ----------------
-        target_heading = angle * progress # target heading is based off progress, which is different for forwards and backwards
+        target_heading = angle * progress # target heading is based off progress
         error = signed_error(target_heading, current_heading) # gets error from signed error function
 
         # ---------------- PD Derivative ----------------
@@ -204,8 +194,8 @@ def advanced_arc(speed, radius, angle):
         inner_speed_ramped *= speed_scale
 
         # ---------------- Apply Motor Speeds ----------------
-        outer_motor.run((outer_speed_ramped + correction) * (left_factor if outer_motor == left_motor else 1) * direction) # applies the motor speeds
-        inner_motor.run((inner_speed_ramped - correction) * (left_factor if inner_motor == left_motor else 1) * direction) # applies the motor speeds
+        outer_motor.run((outer_speed_ramped + correction) * (left_factor if outer_motor == Tanner else 1) * direction) # applies the motor speeds
+        inner_motor.run((inner_speed_ramped - correction) * (left_factor if inner_motor == Tanner else 1) * direction) # applies the motor speeds
 
         # ---------------- Stop Condition ----------------
         if progress >= 1.0: # ounce progress is complete it stops
