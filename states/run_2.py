@@ -13,21 +13,32 @@ async def R2_run():
     robot.settings(straight_acceleration=350,straight_speed=660)
 
     # Go towards sand
-    await drive_straight(2.6)
+    await drive_straight(2.7)
     
     # Slow down for backup
     robot.settings(straight_acceleration=350,straight_speed=350)
     # Pull back sand lever
-    await drive_straight(-2.3)
-
-    # await turn(-20)
-    await arc(-150, 70)
-
-    await arc(40, 65)
+    await drive_straight(-0.5)
     
-    await drive_straight(1.7)
+    # await drive_straight(-0.6)
+
+    await arc(-250, -70)
+    
+    await turn(-70)
+
+    await drive_straight(2.5)
+    
+    # await turn(-20)
+
+    # await arc(-150, 70)
+
+    # await arc(40, 65)
+    
+    # await drive_straight(1.7)
     
     # Drop off flag
+
+    await drive_straight(-0.4)
     await run_motorC(1000, -200)
     # Wait so we can let go of flag
     await wait(500)
@@ -39,13 +50,13 @@ async def R2_run():
     # Turn away from boat
     await turn(-30)
     # Go past boat 
-    await drive_straight(2.3)
+    await drive_straight(2.1)
     # Turn towards Angler Artifacts
     await turn(123)
 
     robot.settings(straight_acceleration=360,straight_speed=360)
     # Go towards Angler Artifacts    
-    await drive_straight(1.7)
+    await drive_straight(1.6)
     # Turn into gears
     await turn(-25)
     # Activate Angler Artifacts 
@@ -53,51 +64,36 @@ async def R2_run():
     await turn(26)
 
     # Back out of Angler Artifacts
-    await drive_straight(-4)
-    await turn(-60)
-    await drive_straight(2.7)
-    await drive_straight(-0.5)
-    await arc(800, 75)
-    # Turn towards the scale pan
+    await drive_straight(-5)
 
+    await(90)
 
+    await arc(400, 80)
     
-    await multitask(turn(200), run_motorC(200, -180))
-    # Drive towards opponent's minecart
-    await drive_straight(2)
-    await multitask(drive_straight(0.8), run_motorC(200, 180))
-    # Turn towards roof
-    await turn(110)
-    await drive_straight(2)
-    await turn(20)
-    await drive_straight(-0.5)
-    await turn(-25)
-    await arc(800, 75)
+    # await turn(-60)
+    # await drive_straight(2.7)
+    # await drive_straight(-0.5)
+    # await arc(800, 75)
+    # # Turn towards the scale pan
+    
 
     
+    # await multitask(turn(200), run_motorC(200, -180))
+    # # Drive towards opponent's minecart
+    # await drive_straight(2)
+    # await multitask(drive_straight(0.8), run_motorC(200, 180))
+    # # Turn towards roof
+    # await turn(110)
+    # await drive_straight(2)
+    # await turn(20)
+    # await drive_straight(-0.5)
+    # await turn(-25)
+    # await arc(800, 75)
+
     
     
-    # 
-    await drive_straight(-1.25)
-    # Turn towards scale
-    await turn(-100)
-    # Go towards scale    
-    await drive_straight(3.5)
-    # Knock scale down
-    # Turn towards roof lever
-    await turn(90)
-    # Push roof lever
-    await drive_straight(1.1)
-    # Back up from roof lever
-    await drive_straight(-0.2)
-    # Turn away from roof lever
-    await turn(-30)
-    # Pull away from roof lever  
-    await drive_straight(0.75)
-    # Turn towards home
-    await turn(50)
-    # Finish heading to blue home  
-    await straight(3.95)
+    
+  
     
     
 
