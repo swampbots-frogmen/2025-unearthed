@@ -38,7 +38,7 @@ async def R2_run():
     
     # Drop off flag
 
-    await drive_straight(-0.4)
+    await drive_straight(-0.6)
     await run_motorC(1000, -200)
     # Wait so we can let go of flag
     await wait(500)
@@ -50,13 +50,13 @@ async def R2_run():
     # Turn away from boat
     await turn(-30)
     # Go past boat 
-    await drive_straight(2.1)
+    await drive_straight(2.3)
     # Turn towards Angler Artifacts
     await turn(123)
 
     robot.settings(straight_acceleration=360,straight_speed=360)
     # Go towards Angler Artifacts    
-    await drive_straight(1.6)
+    await drive_straight(1.4)
     # Turn into gears
     await turn(-25)
     # Activate Angler Artifacts 
@@ -66,9 +66,42 @@ async def R2_run():
     # Back out of Angler Artifacts
     await drive_straight(-5)
 
-    await(90)
+    await drive_straight(0.7)
 
-    await arc(400, 80)
+    await arc(-70, 90)
+
+    await drive_straight(1.1)
+
+    await turn(36)
+
+    await drive_straight(2)
+
+    # await run_motorC(600, -200)
+
+    # await drive_straight(1)
+
+    # await drive_straight(-0.2)
+
+    # await drive_straight(1.2)
+
+    
+
+    # await arc(900, 110)
+
+
+
+
+    # await arc(-100,70)
+
+    # await arc(100, 80)
+
+    # await turn(-60)
+
+    # await drive_straight(2)
+
+    # await arc(400, 80)
+
+    # await drive_straight(1)
     
     # await turn(-60)
     # await drive_straight(2.7)
