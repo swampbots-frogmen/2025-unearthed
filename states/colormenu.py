@@ -13,19 +13,11 @@ from run_4 import R4_run
 from run_5 import R5_run
 
 hub = PrimeHub()
-color_sensor = ColorSensor(Port.E)
+color_sensor_r = ColorSensor(Port.E)
+color_sensor_l = ColorSensor(Port.F)
 
 # Disable system stop button (optional)
 hub.system.set_stop_button(Button.BLUETOOTH)
-
-# Function Color Map
-color_map = {
-    Color.RED: 1,
-    Color.YELLOW: 2,
-    Color.BLUE: 3,
-    Color.GREEN: 4,
-    Color.WHITE: 5
-}
 
 # ----------------------
 # Program functions
@@ -45,6 +37,24 @@ def run_program_green():
 def run_program_white():
     run_task(R5_run())
 
+def run_program_blue_yellow():
+    run_task(R6_run())
+
+def get_program_info(left_sensor, right_sensor):
+    if (left_sensor == Color.YELLOW and right_sensor == Color.YELLOW):
+        return { "color": Color.YELLOW, "program": run_program_yellow, "number": "3" }
+    elif (left_sensor == Color.RED and right_sensor == Color.RED):
+        return { "color": Color.RED, "program": run_program_red, "number": "1" }
+    elif (left_sensor == Color.BLUE and right_sensor == Color.YELLOW):
+        return { "color": Color.ORANGE, "program": run_program_blue_yellow, "number": "2" }
+    elif (left_sensor == Color.GREEN and right_sensor == Color.GREEN):
+        return { "color": Color.GREEN, "program": run_program_blue_yellow, "number": "5" }
+    elif (left_sensor == Color.WHITE and right_sensor == Color.WHITE):
+        return { "color": Color.WHITE, "program": run_program_white, "number": "6" }
+    elif (left_sensor == Color.BLUE and right_sensor == Color.BLUE):
+        return { "color": Color.BLUE, "program": run_program_blue, "number": "4" }
+
+    return None
 # ----------------------
 # Main Menu
 # ----------------------
@@ -59,31 +69,19 @@ def main_menu():
             pressed = hub.buttons.pressed()
 
             # Detect color
-            detected_color = color_sensor.color()
-            if (detected_color in color_map):
-                hub.light.on(detected_color)
-                hub.display.char(str(color_map[detected_color]))
+            detected_color_r = color_sensor_r.color()
+            detected_color_l = color_sensor_l.color()
+            print(f"Color: {detected_color_l} and {detected_color_r}")
+
+            program_info = get_program_info(detected_color_l, detected_color_r)
+        
+            if (program_info != None):  
+                hub.light.on(program_info["color"])
+                hub.display.char(program_info["number"])
+                selected_program = program_info["program"]
             else:
                 hub.light.on(Color.CYAN)
                 hub.display.icon(Icon.PAUSE)
-
-            print(f"Color: {detected_color}")
-
-            if detected_color == Color.RED:
-                selected_program = run_program_red
-                hub.light.on(Color.MAGENTA)
-            elif detected_color == Color.YELLOW:
-                selected_program = run_program_yellow
-                hub.light.on(Color.YELLOW)
-            elif detected_color == Color.BLUE:
-                selected_program = run_program_blue
-                hub.light.on(Color.BLUE)
-            elif detected_color == Color.GREEN:
-                selected_program = run_program_green
-                hub.light.on(Color.GREEN)
-            elif detected_color == Color.WHITE:
-                selected_program = run_program_white
-                hub.light.on(Color.WHITE)
 
         else:
             if Button.CENTER in pressed and selected_program is not None:
