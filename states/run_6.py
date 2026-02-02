@@ -5,14 +5,14 @@ from tadpoleBot import turn, arc, Stop, motorC, run_motorD
 '''
 Run 6 - Mineshaft, Perscouis artifact
 Home: red
-Attachment: TBD
+Attachment: Grill master
 Engineer: TBD
 Authors:Tanner
 '''
 
 async def R6_run():
     # setup max speed 
-    robot.settings(straight_acceleration=400,straight_speed=900)
+    robot.settings(straight_acceleration=500,straight_speed=500)
     # make sure gyro is used 
     robot.use_gyro(True)
     # square up for prcisenes
@@ -26,21 +26,21 @@ async def R6_run():
     # turn toward the mineshafts
     await turn(90)
     # lift the sticks to slove the precous artfact
-    await multitask(run_motorC(300, 200), run_motorD(300,-130))
-    # go in to slove 
+    await multitask(run_motorC(300, 200), run_motorD(300,-150))
+    # go in to solve 
     await drive_straight(0.7)
-    # lift and slove 
-    await multitask(run_motorC(800, -100), run_motorD(300,10))
+    # lift minecart and artifact 
+    await multitask(run_motorC(800, -160), run_motorD(300,25))
     # lower the thick stick to not break 
     await run_motorC(800, 75)
+    # drive away from mineshaft
+    await drive_straight(-0.9)
     # max speed to home 
     robot.settings(straight_acceleration=960,straight_speed=960)
-    # drive away from mineshaft 
-    await drive_straight(-0.9)
     # turn away from minshaft
     await turn(100)
     # drive home 
-    await drive_straight(5.5)
+    await multitask(run_motorC(800, -100), run_motorD(300,60), drive_straight(5.5))
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':
