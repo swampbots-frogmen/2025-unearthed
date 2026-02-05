@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, square_up, motorC, wait, multitask, run_task, run_motorC, drive_straight, turn, arc, Stop
+from tadpoleBot import robot, rotation, square_up, motorC, wait, multitask, run_task, run_motorC, drive_straight, turn, arc, Stop, run_motorD
 from indy import play_raiders_march
 
 # Basic robot settings
@@ -14,73 +14,40 @@ Engineer: Camden and Tanner (alternate)
 Code Authors: Camden, Tanner, Grayson
 '''
 async def R1_run():
+    
     # Square up against wall to start
     await square_up()
 
-    # --- MINECART MISSION --- #
-
-    # Raise lever to avoid hitting brush and go towards brush
-    await multitask(run_motorC(3000, gear_ratio * 60), drive_straight(2))
-    # Arc toward mineshaft and lower arm
-    await multitask(arc(320, 90), run_motorC(50, gear_ratio * -70))
-    # Get a little closer to the mineshaft
-    #await drive_straight(0.05)
+    await run_motorD(3000, gear_ratio * -70)
     
-    # Set some variables to help tweak adjustments easier
-    total_rotation = gear_ratio * 80
-    lift_rotation = 0.72 * total_rotation
+    await drive_straight(3.15)
 
-    # Send minecart over the line
-    await run_motorC(200, lift_rotation)
-    
-    # Wait for a moment to let the cart go across
-    await wait(1000)
+    # wait(500)
 
-    # Lift lever all the way back up to release track
-    await run_motorC(1000, total_rotation - lift_rotation - 20)
+    await run_motorD(3000, gear_ratio * 70)
 
-    # --- MAP REVEAL MISSION --- #
+    await run_motorD(400, gear_ratio * -110)
 
-    # Speed the robot back up again
-    robot.settings(straight_acceleration=550, straight_speed=600)
+    await drive_straight(0.75)
 
-    # Back up towards map reveal & adjust lever to lift top soil
-    await multitask(drive_straight(-1.95), run_motorC(3000, gear_ratio * 110))
+    await turn(-45)
 
-    # Turn to begin map approach
-    await turn(-135)
+    await drive_straight(1)
 
-    robot.settings(straight_acceleration=250, straight_speed=250)
+    await run_motorD(200, gear_ratio * 75)
 
-    # complete map mission
-    await drive_straight(1.25)
-    # lift topsoil
-    await run_motorC(150, gear_ratio * -120)
+    # await run_motorD(500, gear_ratio * -150)
 
-    # --- SOIL DEPOSITS MISSION --- #
+    await drive_straight(-1)
 
-    # back away from map
-    await drive_straight(-0.7)
-    # turn to be parallel to the surface brushing
     await turn(45)
-    # line up to surface brushing
-    await drive_straight(-0.5)
 
-    # Lower lever to grab brush
-    await run_motorC(3000, gear_ratio * -80)
+    await drive_straight(-3.4)
 
-    # Speed back up for brush run
-    robot.settings(straight_acceleration=450, straight_speed=550)
+
+
+    # await drive_straight(-3.15)
     
-    # Knock down soil deposits
-    await drive_straight(0.4)
-    await drive_straight(-0.8)
-    
-    # Lift brush up
-    await run_motorC(150, gear_ratio * 60)
-
-    # Head home
-    await robot.straight(-3.5 * rotation, then=Stop.COAST)
 
 # If we're running ONLY this run (without the menu)
 if __name__ == '__main__':

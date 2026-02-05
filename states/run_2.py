@@ -22,11 +22,11 @@ async def R2_run():
     
     # await drive_straight(-0.6)
 
-    await arc(-250, -70)
+    await arc(-260, -70)
     
-    await turn(-70)
+    await turn(-68)
 
-    await drive_straight(2.5)
+    await drive_straight(2.7)
     
     # await turn(-20)
 
@@ -63,18 +63,58 @@ async def R2_run():
     await run_motorD(1000, 1100)
     await turn(26)
 
+    robot.settings(straight_acceleration=660,straight_speed=660)
+
     # Back out of Angler Artifacts
-    await drive_straight(-5)
+    await drive_straight(-3)
 
-    await drive_straight(0.7)
+    await arc(-200, -80)
 
-    await arc(-70, 90)
+    await turn(45)
 
-    await drive_straight(1.1)
 
-    await turn(36)
 
-    await drive_straight(2)
+    await drive_straight(-1.8)
+
+    await drive_straight(0.3)
+
+    await turn(-30)
+
+    await drive_straight(-1)
+
+    await turn(45)
+
+    await drive_straight(-4)
+
+    # await arc(-75, -75)
+
+
+
+    # await drive_straight(-3)
+
+    # await arc(200, 80)
+
+    # await run_motorC(1000, -170)
+
+    # await drive_straight(0.1)
+
+    # await run_motorC(1000, 200)
+
+    # await drive_straight(-0.1)
+
+    # await arc(100, 80)
+
+    # await drive_straight(3)
+
+    # await drive_straight(0.7)
+
+    # await arc(-70, 90)
+
+    # await drive_straight(1.15)
+
+    # await turn(36)
+
+    # await drive_straight(2)
 
     # await run_motorC(600, -200)
 
