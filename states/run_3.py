@@ -1,4 +1,4 @@
-from tadpoleBot import robot, rotation, square_up, run_task, drive_straight, turn, arc, multitask, run_motorC, run_motorD
+from tadpoleBot import robot, rotation, square_up, run_task, drive_straight, turn, arc, multitask, run_motorC, run_motorD, advanced_arc, wait
 
 '''
 Run 3 - Forge, Collect Stones, Flip Table, Grab millstone
@@ -17,15 +17,21 @@ async def R3_run():
 
     # --- GET ROCKS OFF FORGE --- #
     await drive_straight(4.6)
-    await turn(-40)
+    await turn(-45)
     await drive_straight(-0.3)
     await run_motorC(600, 350)
     await run_motorC(600, -360)
-    await drive_straight(-0.25)
-    await turn(-45)
-    await multitask(drive_straight(-2), run_motorC(600, -250))
-    await turn(90)
-    await drive_straight(-3)
+    #await drive_straight(0.55)
+    await turn(45)
+    robot.settings(straight_acceleration=600, straight_speed=800)
+    await drive_straight(-4)
+    #await turn(-45)
+    #await multitask(drive_straight(-1.5), run_motorC(600, -250))
+    #await turn(-75)
+    #await drive_straight(-1.5)
+    #await turn (-25)
+    #await drive_straight (3)
+
     #await drive_straight(-1)
     #await arc(100, 88)
     #await drive_straight(1.1)
@@ -35,7 +41,6 @@ async def R3_run():
     #await drive_straight(0.45)
     #await turn(50)
     #await arc(400, -30)
-
 
 
 # If we're running ONLY this run (without the menu)
