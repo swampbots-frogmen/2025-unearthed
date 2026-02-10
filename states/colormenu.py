@@ -11,6 +11,7 @@ from run_2 import R2_run
 from run_3 import R3_run
 from run_4 import R4_run
 from run_5 import R5_run
+from run_6 import R6_run
 
 hub = PrimeHub()
 color_sensor_r = ColorSensor(Port.E)
@@ -43,7 +44,7 @@ def run_program_blue_yellow():
 def get_program_info(left_sensor, right_sensor):
     if (left_sensor == Color.YELLOW and right_sensor == Color.YELLOW):
         return { "color": Color.YELLOW, "program": run_program_yellow, "number": "3" }
-    elif (left_sensor == Color.RED and right_sensor == Color.RED):
+    elif (left_sensor == Color.RED or right_sensor == Color.RED):
         return { "color": Color.RED, "program": run_program_red, "number": "1" }
     elif (left_sensor == Color.BLUE and right_sensor == Color.YELLOW):
         return { "color": Color.ORANGE, "program": run_program_blue_yellow, "number": "2" }
