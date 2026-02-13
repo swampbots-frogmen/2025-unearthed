@@ -48,8 +48,8 @@ def get_program_info(left_sensor, right_sensor):
         return { "color": Color.RED, "program": run_program_red, "number": "1" }
     elif (left_sensor == Color.BLUE and right_sensor == Color.YELLOW):
         return { "color": Color.ORANGE, "program": run_program_blue_yellow, "number": "2" }
-    elif (left_sensor == Color.GREEN and right_sensor == Color.GREEN):
-        return { "color": Color.GREEN, "program": run_program_blue_yellow, "number": "5" }
+    elif (left_sensor == Color.GREEN or right_sensor == Color.GREEN):
+        return { "color": Color.GREEN, "program": run_program_green, "number": "5" }
     elif (left_sensor == Color.WHITE and right_sensor == Color.WHITE):
         return { "color": Color.WHITE, "program": run_program_white, "number": "6" }
     elif (left_sensor == Color.BLUE and right_sensor == Color.BLUE):

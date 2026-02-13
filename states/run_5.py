@@ -10,7 +10,7 @@ Authors: Chaz and Tanner
 def R5_run():
     # Basic robot settings for quick launch
     robot.use_gyro(True)
-    robot.settings(straight_acceleration=300, straight_speed=300)
+    robot.settings(straight_acceleration=800, straight_speed=800)
 
     # Square up against wall to start
     square_up()
